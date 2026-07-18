@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One Rhode Consulting - Navigation Service | Resource Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --deep-teal:#2d4a5a;
+    --mid-teal:#3a5f73;
+    --cyan:#4dd9c0;
+    --white:#ffffff;
+    --paper:#f2f6f6;
+    --card:#ffffff;
+    --ink:#1c2e37;
+    --ink-soft:#4d6470;
+    --line:#dbe6e6;
+    --font-display:'Barlow Condensed', sans-serif;
+    --font-body:'Inter', -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{height:100%;}
+  body{
+    font-family:var(--font-body);
+    background:var(--paper);
+    color:var(--ink);
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none;
+    -webkit-touch-callout:none;
+  }
+  input, textarea{ -webkit-user-select:text; user-select:text; }
+
+  /* ===== HEADER ===== */
+  header.site{
+    background:var(--deep-teal);
+    color:var(--white);
+    padding:28px 32px 20px;
+    position:relative;
+    overflow:hidden;
+  }
+  header.site::after{
+    content:"";
+    position:absolute;
+    right:-40px; top:-60px;
+    width:260px; height:260px;
+    border:1px solid rgba(77,217,192,0.18);
+    border-radius:50%;
+  }
+  header.site::before{
+    content:"";
+    position:absolute;
+    right:20px; top:-20px;
+    width:180px; height:180px;
+    border:1px solid rgba(77,217,192,0.12);
+    border-radius:50%;
+  }
+  .eyebrow{
+    font-family:var(--font-body);
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--cyan);
+    font-weight:600;
+    margin-bottom:6px;
+  }
+  h1.title{
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:clamp(28px,4.4vw,46px);
+    letter-spacing:.01em;
+    text-transform:uppercase;
+    line-height:1.05;
+  }
+  p.tagline{
+    font-family:var(--font-body);
+    font-weight:400;
+    font-size:15px;
+    line-height:1.55;
+    color:rgba(255,255,255,0.72);
+    margin-top:10px;
+    max-width:640px;
+  }
+  .disclaimer{
+    font-family:var(--font-body);
+    font-size:13.5px;
+    line-height:1.7;
+    color:rgba(255,255,255,0.82);
+    margin-top:20px;
+    max-width:760px;
+    padding:16px 20px;
+    border-left:3px solid var(--cyan);
+    background:rgba(255,255,255,0.06);
+    border-radius:0 6px 6px 0;
+  }
+  .disclaimer b{ color:var(--white); }
+  .disclaimer a{ color:var(--cyan); text-decoration:underline; }
+
+  /* ===== SECTION NAV ===== */
+  nav.sections{
+    background:var(--mid-teal);
+    display:flex;
+    overflow-x:auto;
+    -ms-overflow-style:none; scrollbar-width:none;
+  }
+  nav.sections::-webkit-scrollbar{display:none;}
+  nav.sections button{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:16px;
+    letter-spacing:.03em;
+    text-transform:uppercase;
+    background:none;
+    border:none;
+    color:rgba(255,255,255,0.68);
+    padding:14px 22px 12px;
+    cursor:pointer;
+    white-space:nowrap;
+    border-bottom:3px solid transparent;
+    transition:color .15s ease, border-color .15s ease;
+  }
+  nav.sections button:hover{ color:rgba(255,255,255,0.92); }
+  nav.sections button.active{
+    color:var(--white);
+    border-bottom-color:var(--cyan);
+  }
+  .count-badge{
+    font-family:var(--font-body);
+    font-size:11px;
+    font-weight:600;
+    color:var(--mid-teal);
+    background:rgba(255,255,255,0.85);
+    border-radius:10px;
+    padding:1px 7px;
+    margin-left:6px;
+  }
+  nav.sections button.active .count-badge{
+    background:var(--cyan);
+    color:var(--deep-teal);
+  }
+
+  /* ===== TOOLBAR ===== */
+  .toolbar{
+    background:var(--white);
+    border-bottom:1px solid var(--line);
+    padding:16px 32px;
+    position:sticky; top:0; z-index:5;
+  }
+  .search-row{
+    display:flex; gap:10px; align-items:center;
+    margin-bottom:12px;
+  }
+  .search-row svg{ flex-shrink:0; color:var(--ink-soft); }
+  input#search{
+    flex:1;
+    font-family:var(--font-body);
+    font-size:15px;
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:9px 14px;
+    color:var(--ink);
+    background:var(--paper);
+    outline:none;
+  }
+  input#search:focus{ border-color:var(--mid-teal); }
+  .chip-row{
+    display:flex; flex-wrap:wrap; gap:8px;
+  }
+  .chip{
+    font-family:var(--font-body);
+    font-size:12.5px;
+    font-weight:600;
+    color:var(--mid-teal);
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:6px 13px;
+    cursor:pointer;
+    transition:all .12s ease;
+    white-space:nowrap;
+  }
+  .chip:hover{ border-color:var(--mid-teal); }
+  .chip.active{
+    background:var(--deep-teal);
+    border-color:var(--deep-teal);
+    color:var(--white);
+  }
+  .chip.active .chip-x{ color:var(--cyan); margin-left:4px; }
+  .clear-link{
+    font-family:var(--font-body);
+    font-size:12.5px;
+    font-weight:600;
+    color:var(--ink-soft);
+    background:none; border:none; cursor:pointer;
+    text-decoration:underline;
+    padding:6px 4px;
+  }
+
+  /* ===== RESULTS ===== */
+  main{ padding:22px 32px 60px; max-width:1180px; margin:0 auto; }
+  .results-meta{
+    font-family:var(--font-body);
+    font-size:13px;
+    color:var(--ink-soft);
+    margin-bottom:16px;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(320px,1fr));
+    gap:16px;
+  }
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:18px 20px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .card-name{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:19px;
+    line-height:1.15;
+    color:var(--deep-teal);
+    letter-spacing:.01em;
+  }
+  .card-desc{
+    font-family:var(--font-body);
+    font-size:13.5px;
+    line-height:1.5;
+    color:var(--ink);
+  }
+  .card-meta{
+    font-family:var(--font-body);
+    font-size:12.5px;
+    line-height:1.5;
+    color:var(--ink-soft);
+    display:flex;
+    flex-direction:column;
+    gap:3px;
+    margin-top:2px;
+  }
+  .card-meta b{ color:var(--ink); font-weight:600; }
+  .card-tags{
+    display:flex; flex-wrap:wrap; gap:5px;
+    margin-top:6px;
+  }
+  .tag-pill{
+    font-size:10.5px;
+    font-weight:600;
+    color:var(--mid-teal);
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:5px;
+    padding:2px 7px;
+    text-transform:uppercase;
+    letter-spacing:.02em;
+  }
+  .card-link{
+    margin-top:8px;
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    font-family:var(--font-body);
+    font-weight:600;
+    font-size:13px;
+    color:var(--deep-teal);
+    text-decoration:none;
+    border-top:1px solid var(--line);
+    padding-top:10px;
+  }
+  .card-link:hover{ color:var(--cyan); }
+  .card-link svg{ flex-shrink:0; }
+  .no-link{
+    margin-top:8px;
+    font-size:12px;
+    color:var(--ink-soft);
+    border-top:1px solid var(--line);
+    padding-top:10px;
+    font-style:italic;
+  }
+
+  .empty-state{
+    text-align:center;
+    padding:60px 20px;
+    color:var(--ink-soft);
+  }
+  .empty-state .big{
+    font-family:var(--font-display);
+    font-size:28px;
+    color:var(--mid-teal);
+    text-transform:uppercase;
+    margin-bottom:8px;
+  }
+
+  footer.site{
+    background:var(--deep-teal);
+    color:rgba(255,255,255,0.55);
+    font-family:var(--font-body);
+    font-size:12px;
+    text-align:center;
+    padding:22px;
+  }
+  footer.site b{ color:rgba(255,255,255,0.85); }
+
+  @media print{
+    body::before{
+      content:"This resource library is not available for printing.";
+      display:block;
+      font-family:var(--font-display);
+      font-size:24px;
+      text-align:center;
+      padding:100px 20px;
+    }
+    header, nav, .toolbar, main, footer{ display:none !important; }
+  }
+
+  @media (max-width:640px){
+    header.site{ padding:22px 18px 16px; }
+    nav.sections button{ padding:12px 14px 10px; font-size:14px; }
+    .toolbar{ padding:12px 18px; }
+    main{ padding:16px 18px 40px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="eyebrow">One Rhode Consulting - Navigation Service</div>
+  <h1 class="title">Resource Library</h1>
+  <p class="tagline">Grant opportunities, pro bono support, ready-to-use templates, and funding-landscape intelligence for Rhode Island nonprofits.</p>
+  <p class="disclaimer">This information is shared as a resource-identification offering to help nonprofits find relevant opportunities and support. <b>There is an expectation that you will thoroughly read and vet any opportunity before applying.</b> Inclusion on this page is not an endorsement, and we do not include every opportunity or resource that exists. If you have questions, contact us at <a href="mailto:info@onerhode.com">info@onerhode.com</a>.</p>
+</header>
+
+<nav class="sections" id="sectionNav"></nav>
+
+<div class="toolbar">
+  <div class="search-row">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input id="search" type="text" placeholder="Search this section...">
+  </div>
+  <div class="chip-row" id="chipRow"></div>
+</div>
+
+<main>
+  <div class="results-meta" id="resultsMeta"></div>
+  <div class="grid" id="grid"></div>
+  <div class="empty-state" id="emptyState" style="display:none;">
+    <div class="big">No matches</div>
+    <div>Try clearing a filter or adjusting your search.</div>
+  </div>
+</main>
+
+<footer class="site">
+  Built for internal use by <b>One Rhode Consulting - Navigation Service</b> partner organizations. Content updates by request. Questions: info@onerhode.com
+</footer>
+
+<script>
+const DATA = {"grants": [{"name": "The Abelard Foundation East", "description": "Supports nonprofit organizations located east of the Mississippi River. The Foundation is committed to supporting local progressive social change activities that expand and protect civil liberties and civil and human rights and promote and strengthen community involvement in, and control over, the decisions that affect their lives.", "category": "Program, Operating", "focus": "Civil/human rights, community organizing, social justice", "link": "https://abelardeast.org/", "deadline": "Rolling; reviewed for Sept 15, 2026 board meeting", "notes": "East of Mississippi; avg grant ~$12,000", "tags": ["Social Justice & Civil Rights"]}, {"name": "New Profit (Discovery Form / Build Investments)", "description": "New Profit is a venture philanthropy organization that backs breakthrough social entrepreneurs advancing equity and opportunity in the United States. New Profit is committed to improving social mobility by supporting organizations with strong track records of performance, a desire for growth, and high potential for social impact.", "category": "Unrestricted, Other (multi-year)", "focus": "Education, workforce development, economic mobility, democracy", "link": "https://newprofit.tfaforms.net/18", "deadline": "Rolling \u2014 Discovery Form accepted year-round", "notes": "Build Investments requires $2M+ annual budget; Discovery Form has no budget floor", "tags": ["Education", "Workforce Development", "Economic Mobility & Entrepreneurship"]}, {"name": "Emergent Fund", "description": "Resourcing frontline Communities: Emergent Fund imagines a world where frontline communities are trusted and resourced to turn catalytic moments into opportunities to rise, organize, and build liberated futures. We provide monthly, open-access, low-barrier, no-reporting grants to impacted communities for rapid response and emergent organizing.", "category": "Other (rapid response, no-report)", "focus": "Social justice, civic engagement, frontline/impacted communities", "link": "https://www.emergentfund.net/apply", "deadline": "Rolling, monthly cycles", "notes": "Low-barrier, no-reporting; national", "tags": ["Community Development", "Social Justice & Civil Rights"]}, {"name": "Pollination Project Daily Grant Program", "description": "Provides daily seed grants up to $1,000 for grassroots community projects.", "category": "Program, Other (seed funding)", "focus": "Grassroots community/basic needs projects", "link": "https://thepollinationproject.org/apply-for-grant", "deadline": "Rolling / daily", "notes": "Small seed grants up to $1,000", "tags": ["General / Unrestricted"]}, {"name": "Albertsons Companies Foundation / Shaw's Foundation", "description": "Shaw's makes contributions in the following areas: Health and Nutrition - Support is provided for organizations promoting nutrition education and maintaining a healthy lifestyle through diet. Youth and Education - Support is provided for K-12 education in schools and in out-of-school organizations that increase test scores, classroom performance, and/or attendance.", "category": "Program", "focus": "Health & nutrition, youth & education", "link": "http://shawsfoundation.org/get-funded/grant-application-process-shaws-star-market/", "deadline": "Rolling", "notes": "RI Shaw's stores in footprint", "tags": ["Education", "Youth & Children", "Health & Human Services"]}, {"name": "Awesome Foundation Grants", "description": "Awards $1,000 monthly microgrants to individuals and groups for innovative community projects.", "category": "Other (microgrant)", "focus": "Community/creative projects, education & youth", "link": "https://www.awesomefoundation.org", "deadline": "Monthly (varies by chapter)", "notes": "$1,000 microgrants; check for an active RI/New England chapter", "tags": ["Education", "Youth & Children"]}, {"name": "George A. Ramlose Foundation", "description": "Funds smaller organizations for specific equipment, special projects, or focused initiatives, with a preference for grants that make a clear, identifiable positive impact on people. Small organizations receive preference over larger ones.", "category": "Program", "focus": "Health & human services; equipment/special projects", "link": "https://ramlosefoundation.org/apply", "deadline": "July 1 \u2013 Aug 31, 2026", "notes": "Prefers smaller organizations", "tags": ["Health & Human Services"]}, {"name": "Mark Wahlberg Youth Foundation", "description": "The goal of the Mark Wahlberg Youth Foundation is to remove and eliminate barriers that prevent youth from succeeding. The mission of the Mark Wahlberg Youth Foundation is to improve the quality of life for inner city youth through a working partnership with other youth organizations.", "category": "Program", "focus": "Youth development, inner-city youth", "link": "https://www.markwahlbergyouthfoundation.org/grant-app", "deadline": "Rolling (verify on site)", "notes": null, "tags": ["Youth & Children"]}, {"name": "L.L.Bean \u2013 Sponsorship & Charitable Donations", "description": "Provides charitable donations, event sponsorships/partnerships, Bootmobile appearances, and influencer/ambassador collaborations to organizations and initiatives that align with L. L. Bean\u2019s mission to inspire connection through the outdoors.", "category": "Other (sponsorship)", "focus": "Outdoor access/recreation", "link": "https://llbean.sponsor.com/form?pid=0&cid=131321", "deadline": "Rolling", "notes": null, "tags": ["General / Unrestricted"]}, {"name": "Lawrence Foundation", "description": "Provides unrestricted grants typically ranging from $5,000\u2013$10,000 to U. S.-based 501(c)(3) public charities, public schools, and libraries working in Environment, Human Services, and occasional Disaster Relief.", "category": "Program, Operating, Unrestricted", "focus": "Environment, human services, occasional disaster relief", "link": "https://thelawrencefoundation.org/application-process", "deadline": "Oct 31, 2026 (also April 30 cycle)", "notes": "$5,000\u2013$10,000 typical; general operating & program requests both accepted", "tags": ["Health & Human Services", "Environment"]}, {"name": "The Collis Foundation", "description": "The Foundation's areas of interest include: education and schools;children and youth; and, historical preservation. Types of support include: project support; general support; and scholarships. Send inquiries to: Astrid C.", "category": "Program, Operating", "focus": "Education/schools, children & youth, historic preservation", "link": null, "deadline": "Rolling (verify on site)", "notes": "Providence, RI based \u2014 contact Astrid C. Womble, Director", "tags": ["Education", "Youth & Children", "Arts & Culture"]}, {"name": "The Edwin S. Webster Foundation", "description": "The foundation normally meets twice a year, in the fall and spring and will consider requests for capital programs, special projects or operating income.", "category": "Operating, Other (capital/special projects)", "focus": "Hospitals, medical research, capital & operating income", "link": "https://websterfoundation.grantsmanagement08.com/", "deadline": "Nov 1, 2026 (also May 1 cycle)", "notes": "Contact office before applying: amcintosh@gmafoundations.com", "tags": ["Health & Human Services"]}, {"name": "Raising Cane's Community Request System", "description": "At Raising Cane\u2019s we are actively involved in every community we serve. Requests for financial support, sponsorships, products or gift cards are funded through your local Raising Cane\u2019s by submitting a request for support within our Community Request System.", "category": "Other (sponsorship/donation)", "focus": "General community support", "link": "https://order.raisingcanes.com/account/signup", "deadline": "Rolling", "notes": "Local restaurant-based requests", "tags": ["General / Unrestricted"]}, {"name": "Amica Mutual Insurance Charitable Foundation", "description": "Focuses on community, education, and safety projects in RI and beyond. Amica Companies Foundation provides support to programs that align with our charitable giving mission statement. ypical range: Approximately $500 up to ~$70,000.", "category": "Program", "focus": "Community, education, safety", "link": "https://www.amica.com/en/about-us/corporate-responsibility/charitable-grants.html", "deadline": "Sept 1, 2026 (quarterly: Mar/Jun/Sep/Dec)", "notes": "RI-based; $500\u2013$70,000 typical", "tags": ["Education"]}, {"name": "Bob's Discount Furniture Charitable Foundation", "description": "Bob\u2019s is committed to supporting local communities through a variety of charitable giving efforts. Bob\u2019s Discount Furniture Charitable Foundation has anchored the company\u2019s philanthropic work for more than 20 years. Additionally, the Bob\u2019s Outreach program was created as a separate entity to help schools and children-related charities.", "category": "Program", "focus": "Education & youth development", "link": "https://bobscares.org/", "deadline": "Rolling (verify on site)", "notes": null, "tags": ["Education", "Youth & Children"]}, {"name": "Chisholm Foundation", "description": "Provides grants nationwide to support projects in the arts, education, and religion, with particular interest in new or demonstration projects that can be expanded with additional funding. The Foundation encourages matching gifts or challenge grants and may award funding in lump sums or installments; only a small number of applications are funded each cycle.", "category": "Program, Capacity Building", "focus": "Arts, education, religion; new/demonstration projects", "link": "https://chisholmfoundation.org/Application.htm", "deadline": "Sept 1, 2026 (for Nov grants)", "notes": "Encourages matching/challenge grants; national", "tags": ["Education", "Arts & Culture", "General / Unrestricted"]}, {"name": "Peter Alfond Foundation", "description": "The Peter Alfond Foundation supports nonprofit organizations in Connecticut, Maine, Massachusetts, New Hampshire, Rhode Island, Vermont, and Puerto Rico in the United States and the Dominican Republic. The PAF looks for leaders and organizations that share the foundation\u2019s values.", "category": "Program, Operating", "focus": "Health & human services", "link": "https://peteralfondfoundation.org/en/inquiries/", "deadline": "Rolling \u2014 submit letter of inquiry", "notes": "Eligible states include RI, plus CT/ME/MA/NH/VT/PR", "tags": ["Health & Human Services"]}, {"name": "Ronald W. Burkle Foundation Grants", "description": "The Ronald W. Burkle Foundation provides grants of up to $250,000 to nonprofit organizations supporting programs that positively impact people and communities around the world. Funding primarily focuses on initiatives in architecture and the arts, education, and efforts addressing the needs of underserved communities.", "category": "Program", "focus": "Arts/architecture, education, underserved communities", "link": "http://burklefoundation.com/request-a-grant/", "deadline": "Rolling", "notes": "Grants up to $250,000; national", "tags": ["Education", "Arts & Culture"]}, {"name": "Smart Family Fund", "description": "Smart Family fund searly-stage non-profits with the potential for positive, scalable impact that have not yet demonstrated the efficacy needed for growth funding or a sustainable model. The mission is to discover, support, and mentor emerging nonprofit organizations and their leaders, providing the necessary backing to help them succeed.", "category": "Other (angel philanthropy/unrestricted-leaning)", "focus": "Early-stage nonprofits, scalable impact", "link": "https://www.smartfamilyfund.org/", "deadline": "Rolling", "notes": "For orgs that haven't yet built an evidence base for larger funding", "tags": ["Economic Mobility & Entrepreneurship"]}, {"name": "The Hilda & Preston Davis Foundation", "description": "The Hilda & Preston Davis Foundation provides funds to charitable organizations whose programs advance the development of all areas of the lives of children and young adults.", "category": "Program", "focus": "Children & young adults, life development", "link": "https://www.hpdavis.org/", "deadline": "Rolling (verify on site)", "notes": null, "tags": ["Youth & Children"]}, {"name": "The Robert F. Stoico / FIRSTFED Charitable Foundation", "description": "The Robert F. Stoico/FIRSTFED Charitable Foundation provides support to nonprofit organizations in southeastern Massachusetts and the northern and central sections of Rhode Island.", "category": "Program", "focus": "Education, housing, environment/recreation", "link": "https://stoicofirstfed.org/apply/", "deadline": "Rolling (verify on site)", "notes": "Southeastern MA and northern/central RI", "tags": ["Education", "Housing", "Environment"]}, {"name": "TJX Foundation", "description": "Our Community Mission is to provide great value to our communities by helping vulnerable families and children access the resources and opportunities they need to build a better future.", "category": "Program", "focus": "Vulnerable families & children", "link": "https://www.tjx.com/corporate-responsibility/communities/our-us-foundation", "deadline": "Portal open through Oct 31, 2026 (rolling review)", "notes": "LOI portal reopens annually Feb 1", "tags": ["Youth & Children"]}, {"name": "Walmart Local Community (Spark Good) Grants", "description": "Small, fast-turnaround grants ($250\u2013$5,000) for local community programs at Walmart/Sam's Club store locations nationwide.", "category": "Program", "focus": "Local community needs, broad", "link": "https://www.walmart.org/how-we-give/program-guidelines/spark-good-local-grants-guidelines", "deadline": "Sept 30, 2026 (quarterly)", "notes": "$250\u2013$5,000; small/fast turnaround", "tags": ["General / Unrestricted"]}, {"name": "The New England Patriots Foundation", "description": "The New England Patriots Foundation accepts requests for donations. The Kraft family and the New England Patriots Foundation are proud to support numerous nonprofit organizations throughout New England.", "category": "Other (donation)", "focus": "Community/recreation, broad New England", "link": "https://forms.donationx.org/form/d11d38e8-1d1e-4514-bad0-62498e4339c0", "deadline": "Rolling", "notes": null, "tags": ["General / Unrestricted"]}, {"name": "Costco Charitable Contributions", "description": "Costco Wholesale offers charitable contributions to organizations that support: Children, Education, Health & Human Services. Their charitable program focuses on making an impact in the communities where they operate, and nonprofits can submit one request per fiscal year (Sept\u2013Aug).", "category": "Program", "focus": "Children's services, education, health & human services", "link": "https://forms.benevity.org/eb5f89d4-4631-4c20-8681-0186712671a0", "deadline": "Rolling", "notes": "One request per fiscal year (Sept\u2013Aug)", "tags": ["Education", "Youth & Children", "Health & Human Services"]}, {"name": "Home Depot Foundation \u2013 Path to Pro Education Grants", "description": "Grants of up to $10,000 (in Home Depot gift cards) to K-12 programs, community/technical colleges, and nonprofits focused on construction skilled-trades training.", "category": "Program", "focus": "Construction/skilled trades workforce training", "link": "https://corporate.homedepot.com/page/path-pro-education-grants-national", "deadline": "Rolling", "notes": "Up to $10,000 in Home Depot gift cards", "tags": ["Workforce Development", "Capacity Building & Nonprofit Support"]}, {"name": "The Jonathan M. Nelson Family Foundation", "description": "The Jonathan M. Nelson Family Foundation primarily supports nonprofit organizations in Rhode Island, with emphasis on Providence. The Foundation's areas of interest include: arts and culture; children and youth, including at-risk youth; education; the environment; and social services.", "category": "Program, Other (general)", "focus": "Arts & culture, children/youth, education, environment, social services", "link": null, "deadline": "Rolling \u2014 written request to Providence Equity Partners office", "notes": "RI-based, Providence emphasis", "tags": ["Education", "Youth & Children", "Arts & Culture", "Environment"]}, {"name": "Nonprofit Finance Fund (NFF)", "description": "Nonprofit Finance Fund\u00ae (NFF\u00ae) is a nonprofit 501(c)(3) and a Community Development Financial Institution (CDFI) that offers loans from $250,000 to $8 million, with opportunities for larger financing through partnerships with other lenders. NFF\u2019s lending helps mission-driven organizations across the United States build community wealth and well-being.", "category": "Other (CDFI financing, not a grant)", "focus": "Mission-driven orgs, broad", "link": "https://nff.org/our-work/financing/eligbility/", "deadline": "Rolling, inquiry-based", "notes": "National CDFI; loans $250K\u2013$8M, not recoverable grants, but relevant capital source", "tags": ["General / Unrestricted"]}, {"name": "Audacious Project (TED)", "description": "Funds bold, transformative nonprofit ideas with large-scale donor support.", "category": "Unrestricted", "focus": "Large-scale climate, education, health, justice, poverty solutions", "link": "https://audaciousproject.org/apply", "deadline": "Rolling, no fixed deadline", "notes": "Large-scale/transformative ideas only", "tags": ["Education", "Health & Human Services", "Environment", "Social Justice & Civil Rights"]}, {"name": "Brown University Community Partnerships (Swearer Center)", "description": "The Swearer Center works to connect the resources of Brown University to community-based entities to advance work focused on social justice and the public good. Submit an inquiry", "category": "Program", "focus": "Social justice, community-based partnership", "link": "https://swearer.brown.edu/community-partners/submit-inquiry", "deadline": "Rolling, inquiry-based", "notes": "Providence, RI based", "tags": ["Community Development", "Social Justice & Civil Rights"]}, {"name": "Care New England Community Giving", "description": "Care New England and its affiliate hospitals and organizations support local organizations working to positively impact community health and wellbeing. Our responsibility to the communities we serve includes supporting local nonprofit community organizations by providing financial contributions, in-kind services, and volunteer support.", "category": "Program", "focus": "Community health & wellbeing", "link": "https://www.carenewengland.org/community-giving", "deadline": "Rolling", "notes": "RI-based health system", "tags": ["Health & Human Services"]}, {"name": "Harry M., Miriam C. and William C. Horton Fund", "description": "Harry M. Horton's wife Miriam established the Harry M., Miriam C. and William C. Horton Fund in 1948 to memorialize her husband and son William, and to benefit public, charitable, educational or religious purposes, societies or institutions which are organized under the laws of, or whose principal objects are carried out within the state of Rhode Island.", "category": "Program, Other", "focus": "Public/charitable/educational/religious purposes", "link": "https://www.bankofamerica.com/philanthropic/foundation/?fnId=174", "deadline": "Nov 2026 (plan ahead)", "notes": null, "tags": ["Education", "General / Unrestricted"]}, {"name": "Alletta Morris McBean Charitable Trust", "description": "The Trust's primary areas of interest include historic preservation and conservation. Since its inception, the Trust has been instrumental in the preservation of many historically significant buildings located in Newport, as well as the preservation of open space on Aquidneck Island.", "category": "Program", "focus": "Historic preservation & conservation", "link": "https://www.allettamcbeancharitabletrust.org/grant-application-aquidneck-island-ri/", "deadline": "July 31, 2026 (for Oct meeting)", "notes": "Aquidneck Island / Newport-area focus", "tags": ["Arts & Culture", "Environment"]}, {"name": "Andrade-Faxon Charities for Children", "description": "Andrade-Faxon Charities for Children strives to improve the quality of life for at-risk children in Rhode Island and southeastern Massachusetts (Bristol and Plymouth counties).", "category": "Program", "focus": "Health, education, welfare of at-risk children", "link": "https://www.andradefaxoncharities.org/", "deadline": "Sept 8, 2026", "notes": "RI and southeastern MA (Bristol/Plymouth counties)", "tags": ["Education", "Youth & Children", "Health & Human Services"]}, {"name": "BankNewport Grants ($5,000+)", "description": "BankNewport Charitable Foundation grants of $5,000 and up supporting Rhode Island 501(c)(3) nonprofit organizations, established 2023 as an extension of the bank's community giving.", "category": "Program", "focus": "Broad nonprofit support", "link": "https://www.banknewport.com/community/charitable-giving/", "deadline": "Oct 2026 window (quarterly: Jan/Apr/Jul/Oct)", "notes": "RI-based bank", "tags": ["General / Unrestricted"]}, {"name": "Beacon Bank Community Support", "description": "Beacon Bank and its foundation invest in organizations that provide a safety net to individuals and families with critical needs such as food, housing and healthcare.", "category": "Program", "focus": "Basic needs: food, housing, healthcare", "link": "https://www.beaconbank.com/about-us/community/community-support/grants-and-giving", "deadline": "Rolling", "notes": null, "tags": ["Health & Human Services", "Housing", "Food Security"]}, {"name": "Beacon Foundation (Beacon Mutual Insurance)", "description": "The Beacon Foundation makes donations and provides grants to U. S. based 501(c)(3) organizations, and municipalities. Such organizations may include 501(c)(3) entities which focus on health, wellness, education, disability prevention and management, and other charitable and civic causes, primarily in Rhode Island and surrounding communities.", "category": "Program", "focus": "Health, wellness, education, disability, civic", "link": "https://www.beaconmutual.com/the-beacon-foundation/", "deadline": "Rolling (verify on site)", "notes": "RI-based; also funds municipalities", "tags": ["Education", "Health & Human Services", "Community Development"]}, {"name": "Carter Charitable Trust Funds", "description": "The grantmaking focus is primarily on educational needs. Support is also provided to health and social services organizations. Most grants are for operational support, and rarely for building needs.", "category": "Operating", "focus": "Education (primary), health, social services", "link": "https://cartertrustfunds.org/apply/", "deadline": "Rolling (verify on site)", "notes": "Mostly operational support, rarely capital", "tags": ["Education", "Health & Human Services"]}, {"name": "Eastern Bank Foundation \u2013 Impact Grants", "description": "Community Donations: These donations are used for many purposes including galas, golf tournaments, and other events, as well as program support for new and existing programs, purchase of equipment or supplies, etc. Donations generally range from $1,000 to $10,000.", "category": "Program", "focus": "Economic inclusion: small business, early childhood, housing, workforce", "link": "https://www.easternbank.com/about-us/eastern-bank-foundation/apply", "deadline": "Rolling (~60-day decision)", "notes": "MA/NH/RI footprint", "tags": ["Youth & Children", "Housing", "Workforce Development", "Economic Mobility & Entrepreneurship"]}, {"name": "Eastern Bank Foundation \u2013 Community Donations", "description": "Community Donations: These donations are used for many purposes including galas, golf tournaments, and other events, as well as program support for new and existing programs, purchase of equipment or supplies, etc. Donations generally range from $1,000 to $10,000.", "category": "Program, Other (event/equipment)", "focus": "Broad community needs", "link": "https://www.easternbank.com/about-us/eastern-bank-foundation/apply", "deadline": "Rolling (~60-day decision)", "notes": "$1,000\u2013$10,000; RI eligible", "tags": ["General / Unrestricted"]}, {"name": "Fidelity Foundation", "description": "The Fidelity Foundation is a private foundation committed to building capacity in nonprofit organizations. Foundation grants are designed to encourage the highest standards of management and long-term self-reliance in nonprofit organizations. Taking an investment approach to grantmaking, we fund organizations where we feel we can add lasting, measurable value.", "category": "Capacity Building", "focus": "Nonprofit management capacity, long-term self-reliance", "link": "https://www.fidelityfoundation.org/applying-and-reporting/letter-of-inquiry/", "deadline": "Rolling (LOI; timing varies \u2014 confirm)", "notes": null, "tags": ["Capacity Building & Nonprofit Support"]}, {"name": "Labcorp Charitable Foundation Grants", "description": "Supports healthcare access, research, screenings, and healthy-lifestyle programs. Requests must fall under health & welfare, education, or community categories.", "category": "Program", "focus": "Health & welfare, education, community", "link": "https://www.labcorp.com/about/our-impact/community/apply-funding", "deadline": "Sept 2026 review cycle (also March)", "notes": null, "tags": ["Education", "Health & Human Services"]}, {"name": "Lloyd G. Balfour Foundation", "description": "Educational organizations that serve New England, generally focused on organizations or programs that provide support for underserved or under-represented populations to prepare for, access, and succeed in higher education, including 2-year and 4-year institutions.", "category": "Program", "focus": "Higher-ed access/success for underserved populations", "link": "https://www.bankofamerica.com/philanthropic/foundation/?fnId=31", "deadline": "Nov 1, 2026 (also Mar 1, Jun 1)", "notes": "New England-serving orgs", "tags": ["General / Unrestricted"]}, {"name": "Navigant Credit Union Community Giving", "description": "Navigant Credit Union supports non-profits throughout Rhode Island who provide programs and services in the following four areas: Food Insecurity Housing Mental Health Financial Literacy", "category": "Program", "focus": "Food insecurity, housing, mental health, financial literacy", "link": "https://navigantcu.org/donations/", "deadline": "July 31, 2026 window (also Oct 2026)", "notes": "RI-based credit union", "tags": ["Education", "Health & Human Services", "Housing", "Workforce Development", "Food Security"]}, {"name": "Nordstrom Community Grants", "description": "Over $1 million awarded annually across the U. S. to hyper-local, grassroots organizations addressing critical community needs for youth and families.", "category": "Program", "focus": "Hyper-local grassroots orgs serving youth & families", "link": null, "deadline": "Oct 2026 window (opens Oct 1\u201331)", "notes": null, "tags": ["Youth & Children"]}, {"name": "Point32Health Community Building Grants", "description": "Supports organizations working on community building \u2014 advancing community power and solutions that promote healthier communities. From the parent company of Harvard Pilgrim/Tufts Health Plan.", "category": "Program", "focus": "Community power, healthier communities", "link": "https://www.cybergrants.com/pls/cybergrants/ao_survey.form?x_gm_id=2957&x_section_id=1877928&x_quiz_survey_id=98564", "deadline": "Sept 18, 2026", "notes": "MA/RI-based health plan (Harvard Pilgrim/Tufts Health Plan parent)", "tags": ["Health & Human Services", "Community Development"]}, {"name": "Rockland Trust Charitable Foundation", "description": "The Rockland Trust Charitable Foundation focuses on enhancing community well-being through grants that prioritize low-to-moderate income populations. Key funding areas include affordable housing, children and youth programs, financial education, workforce development, and small business support.", "category": "Program", "focus": "Affordable housing, small business, children & youth, financial inclusion/workforce", "link": "https://www.rocklandtrust.com/about-us/explore/community-giving#tab1", "deadline": "Rolling through Oct 16, 2026", "notes": "MA/RI bank", "tags": ["Youth & Children", "Housing", "Workforce Development", "Community Development", "Economic Mobility & Entrepreneurship"]}, {"name": "TD Bank Capacity Building Grant", "description": "The range for Capacity Building grants is $25,000-$150,000.", "category": "Capacity Building", "focus": "Nonprofit organizational capacity", "link": "https://www.td.com/content/dam/tdb/document/pdf/about-us/capacity-building-faq-for-release.pdf", "deadline": "Twice yearly \u2014 check TD funding calendar", "notes": "$25,000\u2013$150,000 range", "tags": ["Capacity Building & Nonprofit Support"]}, {"name": "Textron Charitable Contributions Program", "description": "Areas of focus: Job Training and Employment Development - including school-to-work and welfare-to-work programs, job training for underserved audiences, literacy and ESL (English as a Second Language) programs. Enrichment and Mentoring Programs for Youth - such as quality after-school programs and youth development programs.", "category": "Program", "focus": "Job training/employment, youth enrichment & mentoring", "link": "https://www.cybergrants.com/pls/cybergrants/ao_login.login?x_gm_id=5056&x_proposal_type_id=67602", "deadline": "Rolling (verify on site)", "notes": "Textron is RI-based (Providence HQ)", "tags": ["Youth & Children", "Workforce Development", "Capacity Building & Nonprofit Support"]}, {"name": "Hearst Foundations", "description": "Year-round rolling grants nationally for social services, health, education, and culture. Minimum grant $100K. Requires org budget of at least $1M.", "category": "Program, Other (occasional unrestricted)", "focus": "Culture, education, health, social service", "link": "https://www.hearstfdn.org", "deadline": "Rolling, no fixed deadline", "notes": "Min. grant $100K; generally requires $1M+ org budget", "tags": ["Education", "Health & Human Services", "Arts & Culture"]}, {"name": "The Ludcke Foundation", "description": "The Foundation devotes its grants to the fields of education, health, and human services. The trustees have a special interest in programs that focus across two or three of the foundation\u2019s areas of interest and in partnering with other donors with similar objectives to enable more ambitious projects.", "category": "Program", "focus": "Education, health, human services", "link": "https://ludckefoundation.grantsmanagement08.com/", "deadline": "Rolling (verify on site)", "notes": null, "tags": ["Education", "Health & Human Services"]}, {"name": "The NewportFed Charitable Foundation", "description": "The NewportFed Charitable Foundation offers a source of support to non-profit organizations that people depend on for health and human services, community development and education. As a general rule, once a request has been granted the Foundation will not consider any additional grants for a period of twelve months.", "category": "Program", "focus": "Health & human services, community development, education", "link": "https://newportfedfoundation.org/how-to-apply/", "deadline": "Rolling (verify on site)", "notes": "RI-based (Newport)", "tags": ["Education", "Health & Human Services", "Community Development"]}, {"name": "Washington Trust Charitable Giving", "description": "The Foundation's areas of interest include: affordable housing and revitalization programs; business and economic development; youth and family services; health and human services organizations, including hospitals; arts and cultural organizations, including museums; colleges, universities, and libraries; and, conservation and environmental groups.", "category": "Program", "focus": "Affordable housing, economic development, youth/family, health, arts", "link": "https://www.washtrust.com/about/Community-Support/Charitable-Giving", "deadline": "Opens early Aug 2026", "notes": "RI-based bank", "tags": ["Youth & Children", "Health & Human Services", "Housing", "Arts & Culture", "Community Development"]}, {"name": "Webster Bank Community Grants", "description": "Workforce Development: Promote job creation, strengthen small business development, and provide career skills for underserved populations. Community Development: Support creation of affordable housing, including homeownership counseling, foreclosure prevention, first-time homebuyer support, and credit remediation, as well as support for CDFIs and CDCs.", "category": "Program", "focus": "Workforce development, affordable housing/community development", "link": "https://www.websterbank.com/about/corporate-responsibility/philanthropy/grant-guidelines/", "deadline": "Rolling (verify on site)", "notes": null, "tags": ["Housing", "Workforce Development", "Community Development"]}, {"name": "William T. Grant Foundation \u2013 Reducing Inequality", "description": "Funds research on reducing inequality affecting youth ages 5\u201325 in the U. S.", "category": "Other (research grant)", "focus": "Research on reducing youth inequality (ages 5\u201325)", "link": "https://wtgrantfoundation.org/funding-opportunities/research-grants-on-reducing-inequality", "deadline": "Multiple cycles/year \u2014 confirm current dates", "notes": null, "tags": ["Youth & Children"]}, {"name": "The Goodnow Fund", "description": "The Fund maintains a portfolio of projects it supports and provides grants to nonprofit tax exempt organizations for general operating expenses and for special projects. The Fund does not provide support to individuals, political causes, campaigns, or government agencies.", "category": "Operating, Other (special projects)", "focus": "General nonprofit support", "link": "https://thegoodnowfund.org/", "deadline": "Rolling (verify on site)", "notes": null, "tags": ["General / Unrestricted"]}, {"name": "The Michael & Susan Dell Foundation", "description": "We fund social enterprises that directly serve or impact children or youth from urban low-income communities in the areas of education, health, and family economic stability (including livelihoods and financial services). These social enterprises may be structured as for-profit or nonprofit entities.", "category": "Program", "focus": "Education, health, family economic stability (urban low-income youth)", "link": "https://www.dell.org/apply/", "deadline": "Rolling (verify on site)", "notes": null, "tags": ["Education", "Youth & Children", "Health & Human Services"]}, {"name": "Coastal1 Credit Union Grants & Sponsorships", "description": "Financial support for qualifying Rhode Island organizations that positively impact the community at large.", "category": "Program, Other", "focus": "Broad community impact", "link": "https://www.coastal1.org/community/community-giving/", "deadline": "Rolling", "notes": "RI-based credit union", "tags": ["General / Unrestricted"]}, {"name": "Dave's Marketplace Community Giving", "description": "Charitable Support: If seeking Sponsorships or Mini Grants for nonprofit events, school or civic programming, please complete the Charitable Support Form. Be sure to include a copy of your 501c3 status with your request.", "category": "Other (sponsorship/mini-grant)", "focus": "Events, school & civic programming", "link": "https://www.davesmarketplace.com/CommunityGiving/", "deadline": "Rolling", "notes": "RI-based grocer", "tags": ["Education", "Community Development", "General / Unrestricted"]}, {"name": "Amica Sponsorships", "description": "A sponsorship is a payment to an organization, which is producing an event or program, for which Amica will receive promotional, advertising and/or marketing value. The goal is to increase Amica's brand and product awareness in the market.", "category": "Other (sponsorship)", "focus": "Broad community events/programs", "link": "https://www.amica.com/en/about-us/corporate-responsibility/charitable-grants.html", "deadline": "Rolling", "notes": "RI-based", "tags": ["General / Unrestricted"]}, {"name": "BankNewport Contributions (<$5,000)", "description": "Smaller-scale donations (up to $5,000) supporting specific activities such as annual fundraisers, community concerts, festivals, and youth programs.", "category": "Other (contribution)", "focus": "Fundraisers, events, community programs", "link": "https://www.banknewport.com/community/charitable-giving/", "deadline": "Oct 2026 window (quarterly)", "notes": "RI-based bank", "tags": ["General / Unrestricted"]}, {"name": "Centreville Bank Charitable Foundation \u2013 Sponsorships", "description": "Sponsorship and donation support (typically $250\u2013$2,500) to community-based organizations aligned with Centreville Bank's community priorities in RI and eastern CT.", "category": "Other (sponsorship)", "focus": "Community-based organizations", "link": "https://www.centrevillebank.com/Community/Local-Support/Grants-Sponsorships-1", "deadline": "Rolling (reviewed bi-weekly)", "notes": "$250\u2013$2,500; RI & eastern CT", "tags": ["Community Development"]}, {"name": "Nellie Mae Foundation \u2013 Sponsorships", "description": "One-time event sponsorship support for local, state, and regional community events, trainings, and conferences that align with the Foundation's education mission.", "category": "Other (event sponsorship)", "focus": "Community/education events, trainings, conferences", "link": "https://nmefoundation.org/wp-content/uploads/2026/02/2026-event-sponsorship-application.pdf", "deadline": "Sept 10, 2026 (also Mar 26, Jun 25, Nov 5)", "notes": "New England education focus", "tags": ["Education", "Capacity Building & Nonprofit Support", "General / Unrestricted"]}, {"name": "Blue Cross Blue Shield of RI", "description": "Interested in submitting a request for event sponsorship, program support, or general support? Please take a minute to review our Charitable Contributions Policy. If you meet the eligibility requirements and believe your request is aligned with our areas of focus, please submit your proposal.", "category": "Program, Other (event sponsorship)", "focus": "Broad, per charitable contributions policy", "link": "https://www.cybergrants.com/pls/cybergrants/quiz.display_question?x_gm_id=5590&x_quiz_id=6810&x_order_by=1", "deadline": "Rolling (~6 weeks review)", "notes": "RI-based", "tags": ["General / Unrestricted"]}, {"name": "Bay Coast Charitable Grants and Sponsorships", "description": "BayCoast Bank has been committed to enhancing the economic vitality and social welfare of the communities we serve through charitable donations and sponsorships. A major focus of our charitable giving is directed towards education, health and human services, youth programs and community development.", "category": "Program", "focus": "Education, health/human services, youth, community development", "link": "https://baycoast.bank/en/community/donations-and-sponsorships/", "deadline": "Rolling", "notes": "MA/RI bank", "tags": ["Education", "Youth & Children", "Health & Human Services", "Community Development"]}, {"name": "TD Bank \u2013 Non-Profit Training Resource Fund", "description": "TD Charitable Foundation program providing small grants (up to $1,000) to nonprofits for approved training that builds organizational capacity and skillsets.", "category": "Capacity Building", "focus": "Staff/organizational training", "link": "https://www.td.com/content/dam/tdb/document/pdf/about-us/final-td.com-non-profit-training-resource-fund-v3-0524-acc-en.pdf", "deadline": "Rolling, reviewed monthly", "notes": "Max grant $1,000", "tags": ["Capacity Building & Nonprofit Support"]}, {"name": "TechSoup", "description": "Nonprofit marketplace offering donated and deeply discounted software, hardware, and services (375+ products) to eligible nonprofits, NGOs, and charities worldwide.", "category": "Other (in-kind capacity resource)", "focus": "Discounted/donated software & hardware", "link": "https://www.techsoup.org", "deadline": "Rolling, no deadline", "notes": "Not a cash grant, but a real capacity resource", "tags": ["Capacity Building & Nonprofit Support"]}, {"name": "Jay L. Smith Family Foundation", "description": "Provides grant funding to nonprofits supporting health, families, and vulnerable populations through direct services and community programs.", "category": "Program", "focus": "Health, families, vulnerable populations", "link": "https://www.jaylsmithfamilyfoundation.org/projects", "deadline": "Rolling", "notes": null, "tags": ["Health & Human Services"]}, {"name": "The Promise Fund: Imagine Award (Promise Venture Studio)", "description": "The Imagine Award by Promise Venture Studio offers $20,000 in unrestricted funding and a six-month cohort-based learning experience for proximate, early childhood leaders with ideas for transformative impact.", "category": "Unrestricted", "focus": "Early childhood (ages 0\u20135) innovation", "link": "https://www.promisestudio-imagineaward.org/", "deadline": "Opens July 2026 \u2014 confirm close date", "notes": "$20,000 + 6-month cohort", "tags": ["Youth & Children", "Economic Mobility & Entrepreneurship"]}, {"name": "Borealis Philanthropy \u2013 Just Futures Initiative", "description": "To date, Borealis has invested $95 million in grassroots organizers advancing cross-movement work to dismantle the interconnected systems that uphold racial, gender, and ableist oppression.", "category": "Program", "focus": "Racial, gender, disability justice", "link": "https://borealis.tfaforms.net/40", "deadline": "No fixed deadline \u2014 eligibility quiz required to access LOI", "notes": "Two-stage: quiz \u2192 LOI \u2192 invited full proposal", "tags": ["Health & Human Services", "Social Justice & Civil Rights"]}, {"name": "Cricket Island Foundation \u2013 Leadership Transition Fund", "description": "Supports youth-led social change organizations navigating an executive director transition, with a focus on founders/long-tenured leaders (5+ years). Grantees receive $45,000/year for three years in general operating support plus peer coaching. Requires budget under $1.5M and centers youth ages 13\u201324.", "category": "Operating (multi-year GOS)", "focus": "Youth-led orgs navigating ED transition", "link": "https://www.cricketisland.org/post/2026-cricket-island-foundation-leadership-transition-fund-request-for-proposals", "deadline": "Screening form rolling through Sept 1, 2026; full application Oct 16, 2026", "notes": "$45,000/year for 3 years; budget under $1.5M, orgs centering youth 13\u201324", "tags": ["Youth & Children"]}, {"name": "General Motors Corporate Grantmaking", "description": "Supports U. S.-based 501(c)(3) nonprofits aligned with GM's two Social Impact Pillars: STEAM education, road safety, workforce development, and community impact. No fixed funding cap \u2014 grant size varies by project and available funding.", "category": "Program", "focus": "STEAM education, road safety, workforce development", "link": "https://www.gm.com/content/dam/company/docs/us/en/gmcom/company/2025_GM_Grantmaking_Guidelines.pdf", "deadline": "LOI deadline Sept 30, 2026 (rolling until then)", "notes": "No GM facilities in New England \u2014 may reduce competitiveness", "tags": ["Education", "Workforce Development"]}, {"name": "Impact Fund Legal Grants", "description": "Recoverable grants to nonprofit organizations, solo practitioners, and small law firms involved in impact litigation. Funds economic, environmental, racial, and social justice cases benefiting communities facing systemic oppression. Most grants support class actions, but also funds multi-plaintiff and environmental justice cases aimed at meaningful law reform.", "category": "Other (recoverable grant)", "focus": "Impact litigation: economic, environmental, racial, social justice", "link": "https://www.impactfund.org/legal-grants/application-requirements/grant-criteria", "deadline": "Rolling, no fixed deadline", "notes": "Recoverable grants to nonprofits, solo practitioners, small firms \u2014 national", "tags": ["Environment", "Social Justice & Civil Rights"]}, {"name": "Marilyn Lichtman Foundation Grant", "description": "Philanthropic grant for registered nonprofits and community-based organizations driving meaningful change in education, research, community development, and social innovation. Rolling applications accepted year-round.", "category": "Program", "focus": "Education, research, community development, social innovation", "link": "https://marilynlichtmanfoundation.org/how-to-request-a-grant/", "deadline": "Rolling", "notes": null, "tags": ["Education", "Community Development", "Economic Mobility & Entrepreneurship"]}, {"name": "Oak Foundation", "description": "Accepts unsolicited letters of enquiry on a rolling basis for human rights, displacement, housing, and child protection. Funds US and global orgs. Grants range from $25K to $10M.", "category": "Program, Operating", "focus": "Human rights, displacement, housing, child protection", "link": "https://oakfnd.org/grant-making/", "deadline": "Rolling \u2014 unsolicited letters of enquiry accepted", "notes": "$25K\u2013$10M; US and global", "tags": ["Youth & Children", "Housing", "Social Justice & Civil Rights"]}, {"name": "Robert Wood Johnson Foundation \u2013 Pioneer Portfolio", "description": "Funds health, climate, and equity initiatives; municipalities eligible; grants ~$50K\u2013$300K+", "category": "Program", "focus": "Health equity, innovative approaches", "link": "https://www.rwjf.org/en/grants/active-funding-opportunities.html", "deadline": "Rolling \u2014 unsolicited proposals accepted year-round", "notes": "National health equity funder", "tags": ["Health & Human Services"]}, {"name": "Sills Family Foundation", "description": "Explicitly funds nonprofits supporting refugees, migrants, and asylees nationally. Accepts applications. Grants $10K\u2013$25K.", "category": "Program", "focus": "Refugees, migrants, asylees", "link": "https://www.sillsfamilyfoundation.org", "deadline": "Rolling (verify on site)", "notes": "$10,000\u2013$25,000; national", "tags": ["Immigrants & Refugees"]}, {"name": "W.K. Kellogg Foundation", "description": "The W. K. Kellogg Foundation funds organizations advancing child wellbeing, racial equity, maternal and child health, food systems, workforce development, and community-led solutions.", "category": "Program", "focus": "Child wellbeing, racial equity, food systems, workforce development", "link": "https://www.wkkf.org/grants", "deadline": "Rolling, no fixed deadline", "notes": "Major national foundation", "tags": ["Youth & Children", "Workforce Development", "Environment", "Social Justice & Civil Rights"]}, {"name": "Papitto Opportunity Connection (POC) \u2014 Grants for Organizations", "description": "Private Rhode Island foundation investing in the state's Black, Indigenous, and People of Color communities through direct grants to nonprofits in education, job skills training, healthcare, and housing, plus an annual $1M Innovation Challenge.", "category": "Program, Operating", "focus": "Education, workforce, healthcare, housing, entrepreneurship (BIPOC-serving RI orgs)", "link": "https://pocfoundation.com/how-we-work/grant-seekers/", "deadline": "Dec 1\u201315, 2026 (competitive RFP window)", "notes": "RI-based; twice-yearly cycle (June/Dec); decisions follow in June/Dec", "tags": ["Education", "Health & Human Services", "Housing", "Workforce Development", "Economic Mobility & Entrepreneurship"]}, {"name": "Community Engagement Funds (Target)", "description": "Provides small grants to nonprofits and schools for local programs focused on basic needs, youth development, workforce development, community spaces, and arts/culture, with funding decisions made at the local store level.", "category": "Program", "focus": "Basic needs, youth development, workforce development, community spaces, arts/culture", "link": "https://corporate.target.com/about/purpose-history/communities/grants-corporate-giving/community-engagement-funds", "deadline": "Sept 3, 2026 (Cycle 2; Cycle 1 was May 6, 2026)", "notes": "Decisions made at local store level", "tags": ["Youth & Children", "Workforce Development", "Arts & Culture", "Community Development"]}, {"name": "The Richard Davoud Donchian Foundation", "description": "Supports literacy and education programs focused on rethinking curriculum, pedagogy, and academic resources for long-term improvement in education, with emphasis on literacy.", "category": "Program", "focus": "Literacy, Education", "link": "https://www.rddonchian.org/grantrequests.htm", "deadline": "Rolling", "notes": "Grant range $1,000-$25,000", "tags": ["Education"]}], "probono": [{"name": "Taproot Foundation (Taproot Plus)", "description": "Matches nonprofits with skilled volunteer consultants for both short one-hour advisory calls and multi-week pro bono projects, at no cost. Covers strategy, marketing, HR, IT, fundraising, and board development.", "category": "Fundraising, Communications, HR, IT, Board Governance, Strategy", "link": "https://taprootfoundation.org/taproot-plus/", "notes": "Fully free; open to 501(c)(3)s, fiscal-sponsored projects, and public schools nationwide", "tags": ["Fundraising", "Communications", "HR", "IT", "Board Governance", "Strategic Plans"]}, {"name": "Catchafire", "description": "Skills-based volunteering platform connecting nonprofits with professionals who donate their expertise on pre-scoped projects in marketing, IT, finance, HR, and fundraising, averaging over $10,000 in donated value per organization.", "category": "Fundraising, Communications, HR, IT/Website, Finance", "link": "https://www.catchafire.org/", "notes": "Free to nonprofits, but access is usually granted through a sponsoring funder/foundation membership rather than open self-signup \u2014 worth asking a funder if they already sponsor a Catchafire membership, or joining the waitlist directly", "tags": ["Fundraising", "Communications", "HR", "IT", "Finance"]}, {"name": "Common Impact", "description": "Nonprofit intermediary that designs skills-based volunteering partnerships with corporate teams, deploying professionals to tackle a nonprofit's operational challenges in marketing, data/IT, HR, and finance/strategy at no cost to the nonprofit.", "category": "Communications, IT, HR, Finance/Strategy", "link": "https://commonimpact.org/", "notes": "Free to nonprofits; engagements are typically arranged through a participating corporate partner rather than direct sign-up \u2014 reach out directly to inquire", "tags": ["Communications", "IT", "HR", "Finance"]}, {"name": "VolunteerMatch", "description": "Free platform where nonprofits post skilled-volunteer and board-member opportunities (fundraising, marketing, HR, IT, design) and get matched with professionals looking to donate their expertise.", "category": "Fundraising, Communications, HR, IT/Website, Board Governance", "link": "https://www.volunteermatch.org/", "notes": "Free to post and use", "tags": ["Fundraising", "Communications", "HR", "IT", "Board Governance"]}, {"name": "Google Ad Grants (via Google for Nonprofits)", "description": "Provides eligible 501(c)(3) nonprofits with up to $10,000 per month in free Google Search advertising to drive traffic, donations, and awareness.", "category": "Communications, Fundraising", "link": "https://www.google.com/nonprofits/offerings/google-ad-grants/", "notes": "Free, ongoing, but requires active account management to stay compliant with Google's usage rules", "tags": ["Communications", "Fundraising"]}, {"name": "Microsoft Nonprofit Program", "description": "Provides free and deeply discounted Microsoft 365, Azure ($2,000/year in credits), security tools, and discounted GitHub/LinkedIn access to eligible nonprofits, libraries, and museums.", "category": "IT/Website, Cybersecurity, Communications", "link": "https://www.microsoft.com/en-us/nonprofits", "notes": "Free/discounted after eligibility verification; one offer per organization", "tags": ["IT", "Cybersecurity", "Communications"]}, {"name": "Salesforce Power of Us Program", "description": "Gives eligible nonprofits 10 free Salesforce CRM licenses (donor management, fundraising, program tracking), with discounts on additional licenses beyond the first 10.", "category": "Fundraising, Communications, HR", "link": "https://www.salesforce.com/nonprofit/", "notes": "First 10 licenses free; requires 501(c)(3) documentation and a Trailblazer ID", "tags": ["Fundraising", "Communications", "HR"]}, {"name": "TechSoup", "description": "Nonprofit marketplace offering donated and deeply discounted software and hardware (375+ products, including Microsoft, Adobe, Canva, and antivirus/security tools) to eligible nonprofits worldwide.", "category": "IT/Website, Cybersecurity, Compliance", "link": "https://www.techsoup.org", "notes": "Free/discounted after nonprofit status validation", "tags": ["IT", "Cybersecurity", "Compliance"]}, {"name": "NTEN \u2014 Tech Accelerate Assessment", "description": "Free self-assessment tool (with a free NTEN account) that scores a nonprofit's technology and cybersecurity readiness and generates a custom improvement report.", "category": "Cybersecurity, IT/Website", "link": "https://www.nten.org/learn/resource-hubs/cybersecurity", "notes": "Free with NTEN account; unlimited repeat assessments", "tags": ["Cybersecurity", "IT"]}, {"name": "Tech Impact \u2014 PolicyBuilder & Free Assessments", "description": "Free auto-generated computer use policy tool plus a set of low-cost/free technology and security assessments for nonprofits, guided by a tech advisor.", "category": "Cybersecurity, Compliance, IT/Website", "link": "https://techimpact.org/access-resources/explore-topics", "notes": "PolicyBuilder and select assessments are free; deeper consulting/managed IT services are paid", "tags": ["Cybersecurity", "Compliance", "IT"]}, {"name": "La Piana Consulting \u2014 Merger & Alliance Toolkit", "description": "Free downloadable toolkit with practical guidance and self-assessment tools for nonprofits exploring mergers, joint ventures, or other strategic restructuring options.", "category": "Mergers/Restructuring, Alternative Revenue", "link": "https://www.lapiana.org/resources/toolkit/", "notes": "Free download; broader consulting engagements are paid", "tags": ["Mergers/Restructuring", "Alternative Revenue"]}, {"name": "Bridgespan Group \u2014 Knowledge Center", "description": "Free library of guides, templates, and case studies on nonprofit strategy, board governance, leadership transitions, financial sustainability, and mergers, built from Bridgespan's consulting work.", "category": "Board Governance, Mergers/Restructuring, HR, Fundraising strategy", "link": "https://www.bridgespan.org/insights/nonprofit-strategy-and-management-resources", "notes": "Knowledge Center is free; direct consulting engagements are paid (sometimes funder-subsidized) and typically reserved for larger nonprofits", "tags": ["Board Governance", "Mergers/Restructuring", "HR", "Fundraising"]}, {"name": "BoardSource", "description": "National resource on nonprofit board governance, offering free tools like the Ten Basic Responsibilities of Nonprofit Boards checklist and board self-assessment guides.", "category": "Board Governance, Compliance", "link": "https://boardsource.org/", "notes": "Core toolkits and articles are free; deeper resources/consulting require paid membership", "tags": ["Board Governance", "Compliance"]}, {"name": "Nonprofit Marketing Guide", "description": "Free communications and marketing resources for nonprofits, including templates, a weekly tips newsletter, and how-to guides on strategy, social media, and storytelling.", "category": "Communications", "link": "https://www.nonprofitmarketingguide.com/", "notes": "Core content free; paid courses/membership available for deeper training", "tags": ["Communications"]}, {"name": "DH Leonard Consulting \u2014 Free Grant Writing Resources", "description": "Free logic model guide, SMART Objectives toolkit with fillable template, and a Grant Budget Storytelling Guide to help nonprofits strengthen grant narratives and budget justifications.", "category": "Grantwriting, Fundraising", "link": "https://www.dhleonardconsulting.com/free-grant-writing-resources/", "notes": "Free (lead-gen gated, no paid upsell required)", "tags": ["Grantwriting", "Fundraising"]}, {"name": "Candid Learning", "description": "Free courses including Introduction to Proposal Writing, nonprofit financial fundamentals, and fundraising basics, built by the organization behind Foundation Directory and GuideStar.", "category": "Grantwriting, Fundraising, Compliance", "link": "https://learning.candid.org/", "notes": "Free courses; some advanced boot camps are paid", "tags": ["Grantwriting", "Fundraising", "Compliance"]}, {"name": "National Council of Nonprofits \u2014 Starting a Nonprofit Toolkit", "description": "Free state-by-state guidance on nonprofit formation, 501(c)(3) and 501(c)(4) status, bylaws, and compliance basics for organizations forming or restructuring.", "category": "Compliance, Legal structure (501(c)(4) formation)", "link": "https://www.councilofnonprofits.org/running-nonprofit/starting-nonprofit", "notes": "Free", "tags": ["Compliance", "Legal Structure"]}, {"name": "Nonprofit Law Blog (NEO Law Group)", "description": "Free, plain-language legal articles on nonprofit formation, 501(c)(3)/501(c)(4) distinctions, mergers, earned-income/social enterprise structures, and governance, written by nonprofit attorneys.", "category": "Compliance, Legal structure (501(c)(4)/LLC), Mergers/Restructuring, Alternative Revenue", "link": "https://www.nonprofitlawblog.com/", "notes": "Free educational content; not a substitute for retaining counsel on a specific matter", "tags": ["Compliance", "Legal Structure", "Mergers/Restructuring", "Alternative Revenue"]}, {"name": "Social Enterprise Alliance", "description": "National network and resource hub for nonprofits building earned-income ventures or social enterprise/LLC subsidiaries, with free articles, case studies, and a peer community.", "category": "Alternative Revenue, Legal structure (LLC/social enterprise)", "link": "https://socialenterprise.us/", "notes": "Core resources free; conference and some events are paid", "tags": ["Alternative Revenue", "Legal Structure"]}, {"name": "TSNE (Third Sector New England)", "description": "New England capacity-building intermediary offering a free resource hub alongside fiscal sponsorship and consulting services covering HR, finance, and compliance for nonprofits.", "category": "HR, Compliance, Finance", "link": "https://www.tsne.org/", "notes": "Resource hub is free; fiscal sponsorship and direct consulting carry fees", "tags": ["HR", "Compliance", "Finance"]}, {"name": "Kirtley Fisher, Dovetail Innovation (via One Rhode Navigation)", "description": "Strategic planning and adaptive leadership support for organizational leadership teams or boards navigating uncertainty and change. Developed VUCA (Volatility, Uncertainty, Complexity, Ambiguity) planning templates and is available for one-on-one review and feedback on completed templates.", "category": "Strategic Plans, Board Governance", "link": "https://www.navigateri.com/planning-in-motion-aftercare", "notes": "Free; access by contacting the One Rhode Navigation Team", "tags": ["Strategic Plans", "Board Governance"]}, {"name": "Thomas Brendler (via One Rhode Navigation)", "description": "One-on-one consulting on financial sustainability and operational efficiency \u2014 revenue mix review, diversification exploration, and cost-saving strategies around office space, vendors, shared services, or partnerships. Sessions run 2-8 hours, virtual or in person.", "category": "Financial Management/Compliance, Alternative Revenue", "link": "https://wkf.ms/43cl0dj", "notes": "Free; access by contacting the One Rhode Navigation Team", "tags": ["Finance", "Alternative Revenue"]}, {"name": "Allstate Foundation Nonprofit Leadership Center", "description": "Free nonprofit leadership, management, and governance training programs from the Allstate Foundation.", "category": "Board Governance, HR", "link": "https://www.allstatecorporation.com/the-allstate-foundation/nonprofit-leadership-center.aspx", "notes": "Free; applications open Summer 2026, exact dates not yet posted", "tags": ["Board Governance", "HR"]}, {"name": "Just Fund", "description": "A single application profile that connects a nonprofit to 1,100+ philanthropic funders, functioning as a free alternative discovery channel for new funder relationships.", "category": "Fundraising", "link": "https://www.justfund.us/", "notes": "Free profile; rolling", "tags": ["Fundraising"]}], "templates": [{"name": "TemplateLab \u2014 Press Release Templates", "description": "Free press release format templates in Word/PDF, instant download, no account needed.", "category": "Press Releases", "link": "https://templatelab.com/press-release-format-template/", "access": "Instant download, no signup", "tags": ["Press Releases"]}, {"name": "TemplateLab \u2014 SWOT Analysis Templates", "description": "35+ free SWOT analysis templates in Word, PowerPoint, and PDF formats, instant download.", "category": "SWOT", "link": "https://templatelab.com/swot-analysis-templates/", "access": "Instant download, no signup", "tags": ["SWOT"]}, {"name": "TemplateLab \u2014 Project/Grant Proposal Templates", "description": "Free project and grant proposal templates covering executive summary, objectives, budget, and evaluation sections, in Word/PDF.", "category": "Grant Narratives", "link": "https://templatelab.com/project-proposal-templates/", "access": "Instant download, no signup", "tags": ["Grant Narratives"]}, {"name": "dummies.com (Wiley) \u2014 Letter of Inquiry Template", "description": "Free Letter of Inquiry template from the 'Grant Writing For Dummies' companion materials \u2014 the standard first-contact document for approaching a new funder before a full proposal.", "category": "Grant Narratives, Pitches/Case for Support", "link": "https://www.dummies.com/assets/Grant_Writing_FD_Chapter_02_-_Letter_of_Inquiry_Template.doc", "access": "Instant .doc download, no signup", "tags": ["Grant Narratives", "Pitches/Case for Support"]}, {"name": "TemplateLab \u2014 Employee Handbook Templates", "description": "42 free employee handbook templates covering compensation, conduct, benefits, and HR policy sections, in Word.", "category": "HR", "link": "https://templatelab.com/employee-handbook-template/", "access": "Instant download, no signup", "tags": ["HR"]}, {"name": "The SMB Guide \u2014 Press Release Template", "description": "Free, general-purpose press release template plus variations for different announcement types, downloads in Word format.", "category": "Press Releases", "link": "https://www.thesmbguide.com/press-release-template", "access": "Instant download, no signup", "tags": ["Press Releases"]}, {"name": "eForms.com \u2014 Donation Request Letter", "description": "Free donation request letter covering one-time and recurring monthly gift asks, with legal context on 501(c)(3) status and IRS acknowledgment rules. Downloads directly in PDF, Word, or ODT.", "category": "Fundraising (monthly/recurring gift asks)", "link": "https://eforms.com/request-letter/donation/", "access": "Instant download, no signup", "tags": ["Fundraising"]}, {"name": "Wallace Foundation \u2014 StrongNonprofits Toolkit", "description": "Free financial management tools built with BDO's nonprofit advisory team: budget templates, cash flow forecasting tools, a fiscal management activities calendar, financial risk self-assessment, and an equity-in-financial-management self-assessment.", "category": "Financial Management/Compliance, Board Documents, Strategic Plans", "link": "https://wallacefoundation.org/toolkit/strongnonprofits-toolkit", "access": "Instant download, no signup", "tags": ["Financial Management/Compliance", "Board Documents", "Strategic Plans"]}, {"name": "National Council of Nonprofits \u2014 Sample Governance Policies", "description": "Free sample policies for conflict of interest, gift acceptance, investment, and whistleblower protection, linked directly from the resource page.", "category": "Board Documents, Financial Management/Compliance", "link": "https://www.councilofnonprofits.org/running-nonprofit/administration-and-financial-management/financial-management", "access": "Instant download, no signup", "tags": ["Board Documents", "Financial Management/Compliance"]}, {"name": "Propel Nonprofits \u2014 Resource Library", "description": "Direct-download financial and board templates from a nonprofit CDFI: cash flow template, scenario budget planning template, financial policy guidelines, operating reserves policy examples, and board member/officer/committee job descriptions.", "category": "Financial Management/Compliance, Board Documents, HR, Strategic Plans", "link": "https://propelnonprofits.org/resources/", "access": "Instant download, no signup", "tags": ["Financial Management/Compliance", "Board Documents", "HR", "Strategic Plans"]}, {"name": "Ten Basic Responsibilities of Nonprofit Boards (via Center for Nonprofit Management)", "description": "A direct, no-signup PDF covering the ten core board responsibilities \u2014 mission, executive oversight, planning, financial oversight, fundraising, and legal/ethical integrity \u2014 adapted from BoardSource's foundational governance publication.", "category": "Board Documents", "link": "https://cnmsocal.org/wp-content/uploads/2022/02/10BasicResponsibilitiesofaNonprofitBoard.pdf", "access": "Instant download, no signup", "tags": ["Board Documents"]}, {"name": "TemplateLab \u2014 Feasibility Study Templates", "description": "48 free feasibility study templates in Word/PDF for evaluating a new project, program, or venture's viability \u2014 the standard tool for assessing a potential alternative or earned-income revenue stream before committing resources.", "category": "Alternative Revenue, Strategic Plans", "link": "https://templatelab.com/feasibility-study/", "access": "Instant download, no signup", "tags": ["Alternative Revenue", "Strategic Plans"]}, {"name": "GlobalGiving \u2014 Sample Email Fundraising Campaign", "description": "Four pre-drafted, time-bound fundraising emails from a Charity Navigator 4-star, BBB-accredited nonprofit \u2014 adaptable for a monthly-giving launch sequence (invite, follow-up, urgency, close) rather than just a one-time campaign.", "category": "Fundraising (monthly/recurring giving)", "link": "https://www.globalgiving.org/learn/sample-email-fundraising-campaign/", "access": "Direct download, no account creation; page uses a 'Download Now' button (separate optional newsletter signup, not required)", "tags": ["Fundraising"]}, {"name": "AFP Maryland \u2014 Monthly Donor Conversion Request Template", "description": "A one-page 'win-win letter' template for converting a one-time donor into a monthly sustainer, hosted as a conference handout by the Maryland chapter of the Association of Fundraising Professionals \u2014 the field's professional body.", "category": "Fundraising (monthly/recurring giving)", "link": "https://afpmd.memberclicks.net/assets/docs/FRD19handouts/Monthly-Donor-Conversion-Request-Template.pdf", "access": "Instant PDF download, no signup", "tags": ["Fundraising"]}], "pivot": [{"name": "City of Refuge (Columbia, MO) \u2014 Revenue Diversification Case Study", "description": "After being notified that 40% of its federal and state funding could disappear by October 2026, this refugee-services nonprofit pivoted toward community-based crowdfunding and scaled up its revenue-generating programs to close the anticipated gap.", "category": "Case Study \u2014 Revenue Diversification", "link": "https://www.yahoo.com/news/articles/missouri-refugee-providers-adjust-financial-150018629.html", "notes": "One of several Missouri refugee-service providers making similar moves; illustrates a small/mid-size org's real pivot, not just theory", "tags": ["Case Study \u2014 Revenue Diversification"]}, {"name": "Charity Bridge Fund (JustGive) \u2014 Donor-Matching Platform", "description": "A free, nonpartisan national platform launched in 2025 that maintains a consolidated database of nonprofits impacted by federal funding cuts and connects them directly with individual donors, family foundations, donor-advised funds, and wealth advisers \u2014 no platform fees.", "category": "Model \u2014 Donor-Matching Platform", "link": "https://www.charitybridgefund.org/about-us", "notes": "Actionable: nonprofits can create a free profile; runs weekly webinars and daily office hours to onboard new organizations", "tags": ["Model \u2014 Donor-Matching Platform"]}, {"name": "Essex County Community Foundation \u2014 Community Response Fund", "description": "Launched a dedicated emergency fund (food, healthcare, housing focus) that reopened for a second application round in January 2026, while also convening local legislators and nonprofits to hear directly how the cuts were landing.", "category": "Model \u2014 Philanthropic Rapid-Response Fund", "link": "https://www.insidephilanthropy.com/home/how-5-community-foundations-are-handling-the-healthcare-fallout-of-trumps-cuts", "notes": "Notable for combining a grant fund with a legislative-listening convening, not just writing checks", "tags": ["Model \u2014 Philanthropic Rapid-Response Fund"]}, {"name": "Silicon Valley Community Foundation \u2014 Community Lifeline Fund", "description": "Launched in October 2025 as a rapid-response fund for organizations providing food, housing, healthcare, and legal services, raising over $1 million from early donors within weeks of launch, aimed squarely at backfilling Medicaid/SNAP/housing losses in two counties.", "category": "Model \u2014 Philanthropic Rapid-Response Fund", "link": "https://www.svcf.org/about/news-media/press-releases/silicon-valley-community-foundation-launches-community-lifeline-fund-to-address-critical-needs-in-wake-of-federal-funding-cuts", "notes": "A model for how a large community foundation can move fast; useful to show a board considering 'why isn't philanthropy just filling the gap'", "tags": ["Model \u2014 Philanthropic Rapid-Response Fund"]}, {"name": "Foundations Community Partnership (Bucks County, PA) \u2014 Target Funding Rapid Response Grants", "description": "Offers existing grantees up to $15,000 specifically to cover the mechanics of adjusting to lost federal funding: costs tied to winding down services, layoffs, transitioning clients to other providers, mergers/collaborations, and strategic litigation.", "category": "Model \u2014 Bridge/Transition Grantmaking", "link": "https://www.philanthropy.com/news/news-beasleyjan26emergencygrants-0129/", "notes": "Useful model for what a 'transition grant' can specifically fund beyond generic operating support \u2014 worth referencing when asking a funder to create one", "tags": ["Model \u2014 Bridge/Transition Grantmaking"]}, {"name": "NEA Grant Terminations \u2014 Cornerstone Theater Co. & Studio Two Three", "description": "On a single evening in May 2025, the National Endowment for the Arts terminated grants to 377+ organizations with immediate effect \u2014 Cornerstone Theater Company (LA) lost $40,000 and Studio Two Three (Richmond) lost $30,000 in funds already budgeted and spent.", "category": "Cautionary Example \u2014 Sudden Termination Risk", "link": "https://www.mazlo.com/blog/when-federal-funding-vanishes-how-to-build-a-more-resilient-nonprofit", "notes": "Illustrates why 'awarded and budgeted' federal funding can no longer be treated as guaranteed cash flow \u2014 relevant to reserve-policy conversations", "tags": ["Cautionary Example \u2014 Sudden Termination Risk"]}, {"name": "Urban Institute \u2014 Nonprofit Trends and Impacts Survey", "description": "A nationally representative survey of 2,737 nonprofits found 1 in 3 organizations serving communities had already lost government funding by early 2025, with the full budget impact not expected to be clear until 2026 or later.", "category": "Sector Data", "link": "https://theconversation.com/1-in-3-us-nonprofits-that-serve-communities-lost-government-funding-in-early-2025-267795", "notes": "From a nonpartisan research institute; good citation for board materials or grant narratives describing sector context", "tags": ["Sector Data"]}, {"name": "Nonprofit Finance Fund \u2014 2025 State of the Nonprofit Sector Survey", "description": "Found that 52% of nonprofits have three months or less of cash reserves on hand, and many organizations depend on just one or two major funding sources to survive \u2014 the core vulnerability driving the current push toward diversification.", "category": "Sector Data", "link": "https://www.mazlo.com/blog/when-federal-funding-vanishes-how-to-build-a-more-resilient-nonprofit", "notes": "Useful benchmark for a reserve-policy conversation with a board", "tags": ["Sector Data"]}, {"name": "Instrumentl \u2014 2025 Nonprofit Funding Survey", "description": "Found 85% of nonprofits report being impacted by federal funding changes, 82% are now pursuing more private/corporate grants as their primary adaptation strategy, and losing a single $2 million federal grant can mean chasing 10-20 smaller private awards to close the gap.", "category": "Sector Data", "link": "https://www.professionalgrantwriter.org/how-the-federal-funding-pullback-is-reshaping-private-foundation-grants-in-2026", "notes": "The application-volume math here is a useful, concrete talking point for staffing/capacity conversations about grant-writing load", "tags": ["Sector Data"]}, {"name": "BDO \u2014 When Federal Funding Falls Short, State and Local Governments Step In", "description": "Documents state and local governments partially stepping into the gap left by federal cuts, while cautioning nonprofits against 'diversifying' into a single new concentrated funding source (e.g., swapping federal dependency for state dependency).", "category": "Strategic Framework", "link": "https://www.bdo.com/insights/blogs/nonprofit-standard/when-federal-funding-falls-short-state-and-local-governments-step-in-to-support-nonprofits", "notes": "Good counter-argument to 'just replace federal with state funding' as a full solution", "tags": ["Strategic Framework"]}, {"name": "KLR \u2014 Nonprofit Federal Funding 2026: Strategies for Resilience", "description": "A practitioner playbook recommending cash reserve building, scenario-based budgeting for funding gaps, proactive funder communication, and cross-sector partnerships (other nonprofits, corporations, government) to share resources and advocate jointly for funding stability.", "category": "Strategic Framework", "link": "https://kahnlitwin.com/blogs/mission-matters-blog/staying-resilient-amid-nonprofit-federal-funding-uncertainties", "notes": "Accessible, board-ready summary of the standard resilience playbook", "tags": ["Strategic Framework"]}], "monitor": [{"name": "CVS Health Foundation / Corporate Giving", "description": "The CVS Health Foundation's annual grantmaking program for organizations in the Greater Hartford (CT) area and the state of Rhode Island. This program awards general operating support grants ($50,000) to nonprofits working to meet the community's health and health-related social needs.", "category": "Operating", "focus": "Health & health-related social needs (Greater Hartford CT + RI)", "link": "https://www.cvshealth.com/impact/healthy-community/funding.html", "last_deadline": "April 3, 2026", "inferred_next": "~Spring 2027", "notes": "$50,000 GOS grants; strong RI/CT fit \u2014 watch closely", "tags": ["Health & Human Services"]}, {"name": "TD Charitable Foundation \u2014 Housing for Everyone", "description": "TD Bank's flagship housing program, awarding $250,000 grants to nonprofits deploying eviction-prevention and housing-stability solutions in low- and moderate-income communities across TD's footprint.", "category": "Program", "focus": "Affordable housing, eviction prevention", "link": "https://stories.td.com/us/en/article/td-charitable-foundation-opens-applications-for-10m-in-grants-for-nonprofits-helping-renters-stay-housed", "last_deadline": "Nov 25, 2025 (2026 cycle)", "inferred_next": "~Oct\u2013Nov 2026", "notes": "$250,000 awards; TD footprint includes New England", "tags": ["Housing", "Community Development"]}, {"name": "Comcast NBCUniversal \u2014 Local Impact Grants", "description": "Unrestricted general operating grants (up to $50,000) to nonprofits in NBC/Telemundo-owned television station markets, funding youth education, storytelling pathways, and community engagement work.", "category": "Unrestricted", "focus": "Youth education, storytelling pathways, community engagement", "link": "https://www.localimpactgrants.com/", "last_deadline": "April 24, 2026", "inferred_next": "~March\u2013April 2027", "notes": "Only in NBC/Telemundo-owned station markets \u2014 confirm Providence/Boston DMA eligibility before relying on this", "tags": ["Education", "Youth & Children"]}, {"name": "Champlin Foundation \u2014 Capital Requests", "description": "Capital project grants are awarded to Rhode Island-based nonprofit organizations. The Foundation prefers to focus support on those organizations that have had their 501c3 status or have been providing programming through a fiscal sponsor for at least 3 years.", "category": "Other (capital/equipment only \u2014 not program/operating)", "focus": "Arts & culture, healthcare, education, historic preservation, libraries, social services, animal welfare, youth", "link": "https://champlinfoundation.org/apply/", "last_deadline": "July 1, 2026 (Cycle Two)", "inferred_next": "Dec 15, 2026 \u2013 Jan 15, 2027 (Cycle One)", "notes": "RI's largest capital funder \u2014 flagged despite category mismatch since it's foundational for RI orgs planning ahead", "tags": ["Education", "Youth & Children", "Health & Human Services", "Arts & Culture"]}, {"name": "Bank of America Charitable Foundation", "description": "Funding for (1) Basic Needs and Income Creation and (2) Stable Housing and Empowering Communities", "category": "Program", "focus": "Basic needs/income creation; stable housing/empowering communities", "link": "https://about.bankofamerica.com/en/making-an-impact/charitable-foundation-grant-faq", "last_deadline": "June 29, 2026 (Stable Housing cycle)", "inferred_next": "Check site \u2014 BofA runs additional priority-area cycles through the year", "notes": "Large national funder; worth periodic monitoring", "tags": ["Housing"]}, {"name": "Centreville Bank Charitable Foundation \u2014 Grants", "description": "Supports local community-based organizations tackling Rhode Island's most significant challenges, investing in education, health & human services, and community development across RI and eastern CT.", "category": "Program", "focus": "Education, health & human services, community development", "link": "https://www.centrevillebank.com/Community/Local-Support/Grants-Sponsorships-1", "last_deadline": "April 15, 2026", "inferred_next": "~March\u2013April 2027", "notes": "RI & eastern CT", "tags": ["Education", "Health & Human Services", "Community Development"]}, {"name": "Citizens Bank \u2014 Champions in Action", "description": "Long-running program (est. 2002) supporting nonprofits addressing community social challenges; 2026 cycle focused on AI readiness/capacity, with award package including $50,000 grant, media coverage, and volunteer engagement.", "category": "Program, Other", "focus": "Community social challenges; AI readiness in 2026 cycle", "link": "https://www.citizensbank.com/about-us/community/champions-in-action.aspx", "last_deadline": "2026 cycle closed", "inferred_next": "~Fall 2026 (check site)", "notes": "$50,000 award + media coverage + volunteer support", "tags": ["General / Unrestricted"]}, {"name": "Cox Charities New England \u2014 Community Grants", "description": "Supports youth, education, and technology programs in RI & neighboring states. Cox Charities Community Grants range between $5,000 and $12,000 and are given each year to deserving non-profit organizations dedicated to STEAM education.", "category": "Program", "focus": "Youth, education, STEAM/technology programs", "link": "https://www.coxcharitiesne.org/community-grant-application", "last_deadline": "2026 cycle closed", "inferred_next": "~check site for next annual window", "notes": "$5,000\u2013$12,000; RI & neighboring states", "tags": ["Education", "Youth & Children"]}, {"name": "Dr. Scholl Foundation", "description": "Private foundation supporting innovative and practical charitable solutions through annual grants.", "category": "Program", "focus": "Innovative, practical charitable solutions (broad)", "link": "https://www.drschollfoundation.com/", "last_deadline": "2026 cycle closed", "inferred_next": "~2027", "notes": "National; monitor for reopening", "tags": ["General / Unrestricted"]}, {"name": "Whole Foods Market Foundation \u2014 Garden Grant", "description": "Provides a $3,500 grant to support new or existing edible educational gardens at K-12 public, charter, tribal, or nonprofit private schools in the U. S. and Canada, prioritizing under-resourced student populations.", "category": "Program", "focus": "K\u201312 edible educational gardens", "link": "https://www.wholefoodsmarketfoundation.org/our-work/childrens-nutrition/garden-grant", "last_deadline": "March 15, 2026", "inferred_next": "~March 15, 2027", "notes": "$3,500 grant; explicitly confirmed annual by funder", "tags": ["Education"]}, {"name": "Educating All Learners Alliance \u2014 New Champions Fund", "description": "Annual competitive program from InnovateEDU featuring an unrestricted subgrant plus a year of support for organizations advancing inclusive education practices.", "category": "Unrestricted", "focus": "Inclusive education subgrants", "link": "https://educatingalllearners.org/new-champions/", "last_deadline": "March 6, 2026", "inferred_next": "~Feb\u2013March 2027", "notes": "Unrestricted subgrant + year-long support", "tags": ["Education"]}, {"name": "AAUW Community Action Grants", "description": "Community Action Grants: These grants provide funding to nonprofit organizations, universities, and AAUW branches and state organizations in the U. S., including U. S. territories, for programs that promote education and equity for women and girls in grades K-12, with emphasis on STEM.", "category": "Program", "focus": "Education & equity for women/girls, STEM emphasis", "link": "https://www.aauw.org/resources/programs/fellowships-grants/", "last_deadline": "2026 cycle closed", "inferred_next": "~check site for next year", "notes": "National", "tags": ["Education"]}, {"name": "Vilcek Foundation Grants", "description": "Supports nonprofits serving immigrants in arts, sciences, education, and social services. The Vilcek Foundation invites applications from eligible nonprofit organizations whose mission or programs focus on supporting immigrant contributions in the arts, sciences, culture, and society.", "category": "Program", "focus": "Immigrant contributions in arts, sciences, education, social services", "link": "https://vilcek.org/grants/", "last_deadline": "April 30, 2026", "inferred_next": "~April 2027", "notes": "Funded activity period runs Sept\u2013Aug following year", "tags": ["Education", "Arts & Culture", "Immigrants & Refugees"]}, {"name": "Kendall Foundation \u2014 New England Food Vision Prize", "description": "Supports partnerships expanding student access to local food, strengthening school/campus food procurement systems, and building a more resilient regional food economy across New England.", "category": "Program", "focus": "Regional food systems, student food access", "link": null, "last_deadline": "June 5, 2026 (LOI)", "inferred_next": "~June 2027", "notes": "$25,000\u2013$100,000; New England-specific \u2014 strong regional fit", "tags": ["Youth & Children", "Environment"]}, {"name": "Lawson Charitable Foundation \u2014 Impact Grant", "description": "Supports New England nonprofits working in food access across three tiers \u2014 Mobile Markets, Food Hubs, and Teaching Farms \u2014 with grants from $10,000 to $35,000/year over a 2-year partnership.", "category": "Program", "focus": "Food access: mobile markets, food hubs, teaching farms (New England)", "link": "https://lawsoncharitablefoundation.org/for-grant-seekers/", "last_deadline": "June 30, 2026", "inferred_next": "~June 2027", "notes": "Seed/Growth/Rooted tiers up to $35,000/year", "tags": ["General / Unrestricted"]}, {"name": "Shipt Community Impact Grants", "description": "Supports IRS-certified 501(c)(3) nonprofits (or those with a 501(c)(3) fiduciary) focused on food access. Three focus areas: Teaching Farms, Mobile Markets, and Food Hubs. Three grant tiers: Seed (up to $10k, 1 year), Growth (up to $20k, 1 year), and Rooted (up to $35k/year, 2 years).", "category": "Program", "focus": "Food access: teaching farms, mobile markets, food hubs", "link": "https://www.shipt.com/grants", "last_deadline": "June 12, 2026 (window closed)", "inferred_next": "~Spring 2027", "notes": "Pairs well with Lawson Foundation timing \u2014 both food-access funders", "tags": ["General / Unrestricted"]}, {"name": "Looking Out Foundation", "description": "Supports social justice, LGBTQ+ advocacy, humanitarian aid, immigrant support, and grassroots activism initiatives.", "category": "Program", "focus": "Social justice, LGBTQ+ advocacy, immigrant support, grassroots activism", "link": null, "last_deadline": "July 1, 2026 (just missed cutoff)", "inferred_next": "Jan 15, 2027", "notes": "Twice-yearly cycle", "tags": ["Social Justice & Civil Rights", "Immigrants & Refugees"]}, {"name": "New Profit \u2014 Connected Futures", "description": "Cohort for organizations whose work bridges divides and brings people together to solve problems collectively, across health, economic mobility, democracy, and/or education. Selected orgs receive $100,000 unrestricted funding plus leadership development support.", "category": "Unrestricted, Capacity Building", "focus": "Health, economic mobility, democracy, education (bridge-building orgs)", "link": "https://www.newprofit.org", "last_deadline": "May 26, 2026 (Discovery Form)", "inferred_next": "~check site for 2027 cohort", "notes": "$100,000 unrestricted + $10,000 leadership development", "tags": ["Education", "Health & Human Services", "Economic Mobility & Entrepreneurship"]}, {"name": "Kauffman Foundation \u2014 Equitable Economic Mobility Research Grants", "description": "Field-initiated research grants for scholars/research teams advancing understanding of equitable economic mobility, systems-level insight, and where opportunity is expanding or constrained.", "category": "Other (research grant)", "focus": "Equitable economic mobility research", "link": "https://www.kauffman.org/funding/grants/research/", "last_deadline": "June 30, 2026", "inferred_next": "~June 2027", "notes": "Aimed at researchers/research teams, not direct service orgs", "tags": ["Economic Mobility & Entrepreneurship"]}, {"name": "Ameriprise Financial Community Grants", "description": "Supports nonprofits addressing basic needs, economic stability, and community vitality.", "category": "Program", "focus": "Basic needs, economic stability, community vitality", "link": "https://www.ameriprise.com/about/community-impact/grant-making", "last_deadline": "May 15, 2026", "inferred_next": "~March\u2013May 2027", "notes": "National", "tags": ["General / Unrestricted"]}, {"name": "ETC (Electronic Theatre Controls) Community Betterment Grant", "description": "Employee-committee-reviewed cash grants awarded annually to nonprofit organizations across the communities ETC serves in the U. S.", "category": "Program", "focus": "Broad community support", "link": "https://www.etcconnect.com/About/Philanthropy/Funding-Grant.aspx", "last_deadline": "June 30, 2026", "inferred_next": "~mid-2027", "notes": "Employee-committee reviewed; national", "tags": ["General / Unrestricted"]}, {"name": "McCarthey Dressman Education Foundation", "description": "The McCarthey Dressman Education Foundation supports K\u201312 educators across the United States who are developing innovative approaches to improve student learning, particularly for at-risk and underfunded students.", "category": "Program", "focus": "K\u201312 innovative teaching approaches for at-risk/underfunded students", "link": "https://mccartheydressman.org/", "last_deadline": "April 15, 2026 (or 200 submissions, whichever first)", "inferred_next": "~April 2027", "notes": "National", "tags": ["Youth & Children"]}, {"name": "The Yass Foundation for Education \u2014 Yass Prize", "description": "Yass Prize is viewed as the \u201cPulitzer for Education Innovation\u201d - devoted to identifying and elevating the next generation of education changemakers.", "category": "Unrestricted", "focus": "Education innovation ('Pulitzer for Education Innovation')", "link": "https://apply.stopforeducation.org/", "last_deadline": "June 1, 2026", "inferred_next": "~June 2027", "notes": "Large national prize; competitive", "tags": ["Education", "Economic Mobility & Entrepreneurship"]}, {"name": "Sparkplug Foundation Grant", "description": "Supports early-stage projects led by members of a community for their community. Grants range from $1,000\u2013$20,000 and can cover outreach materials, short-term staffing, capacity-building activities, and other start-up costs. Focuses on initiatives that create systemic change, shift power, or address local needs.", "category": "Other (community-led, seed funding)", "focus": "Community-led, systemic-change, power-shifting initiatives", "link": "https://www.sparkplugfoundation.org/", "last_deadline": "No fixed 2026 date confirmed", "inferred_next": "Add to calendar and monitor \u2014 no confirmed pattern", "notes": "$1,000\u2013$20,000", "tags": ["General / Unrestricted"]}, {"name": "Centreville Bank Charitable Foundation \u2014 Grants", "description": "Supports local community-based organizations tackling Rhode Island's most significant challenges, investing in education, health & human services, and community development across RI and eastern CT.", "category": "Program", "focus": "Education, Health & Human Services, Community Development", "link": "https://www.centrevillebank.com/Community/Local-Support/Grants-Sponsorships-1", "last_deadline": "April 15, 2026 (cycle: March 15 - April 15)", "inferred_next": "~March 2027", "notes": "RI & eastern CT bank; separate from their rolling Sponsorships program (which is in the main Grant Opportunities tab)", "tags": ["Education", "Health & Human Services", "Community Development"]}, {"name": "Max and Victoria Dreyfus Foundation", "description": "Funds programs where small grants ($1,000-$20,000) can make a significant difference \u2014 museums, cultural/performing arts, schools, hospitals, youth/senior/disability programs, environmental protection, and community-based organizations.", "category": "Program, Operating", "focus": "Arts & Culture, Education, Health & Human Services, Environment", "link": "https://www.mvdreyfusfoundation.org/", "last_deadline": "May 11, 2026 (batch cutoff for Fall 2026 award round)", "inferred_next": "~Nov 2026 (likely cutoff for Spring 2027 round \u2014 unconfirmed)", "notes": "Accepts requests on a rolling basis, batched into award rounds", "tags": ["Education", "Health & Human Services", "Arts & Culture", "Environment"]}]};
+</script>
+<script>
+// ---- Section configuration ----
+const SECTIONS = [
+  { key: "grants",   label: "Funding Opportunities (Available)",     data: DATA.grants,
+    fields: { name:"name", desc:"description", link:"link",
+      meta: [ ["Category","category"], ["Deadline","deadline"], ["Notes","notes"] ] } },
+  { key: "monitor",  label: "Funding Opportunities to Monitor",      data: DATA.monitor,
+    fields: { name:"name", desc:"description", link:"link",
+      meta: [ ["Category","category"], ["Last deadline","last_deadline"], ["Next window","inferred_next"], ["Notes","notes"] ] } },
+  { key: "probono",  label: "Pro Bono Supports",       data: DATA.probono,
+    fields: { name:"name", desc:"description", link:"link",
+      meta: [ ["Access","notes"] ] } },
+  { key: "templates",label: "Key Templates for Nonprofit Operations", data: DATA.templates,
+    fields: { name:"name", desc:"description", link:"link",
+      meta: [ ["Access","access"] ] } },
+  { key: "pivot",    label: "Spotlight: How Nonprofits Pivoted After Federal Funding Loss", data: DATA.pivot,
+    fields: { name:"name", desc:"description", link:"link",
+      meta: [ ["Notes","notes"] ] } },
+];
+
+let state = { section: "grants", search: "", activeTags: new Set() };
+
+// ---- Build section nav ----
+const sectionNav = document.getElementById("sectionNav");
+SECTIONS.forEach(sec => {
+  const btn = document.createElement("button");
+  btn.dataset.key = sec.key;
+  btn.innerHTML = sec.label + ' <span class="count-badge">' + sec.data.length + '</span>';
+  btn.addEventListener("click", () => {
+    state.section = sec.key;
+    state.search = "";
+    state.activeTags = new Set();
+    document.getElementById("search").value = "";
+    render();
+  });
+  sectionNav.appendChild(btn);
+});
+
+function currentSection(){
+  return SECTIONS.find(s => s.key === state.section);
+}
+
+function allTagsFor(sec){
+  const set = new Set();
+  sec.data.forEach(r => (r.tags || []).forEach(t => set.add(t)));
+  return Array.from(set).sort();
+}
+
+function renderChips(){
+  const sec = currentSection();
+  const chipRow = document.getElementById("chipRow");
+  chipRow.innerHTML = "";
+  const tags = allTagsFor(sec);
+  if (state.activeTags.size > 0) {
+    const clear = document.createElement("button");
+    clear.className = "clear-link";
+    clear.textContent = "Clear filters (" + state.activeTags.size + ")";
+    clear.addEventListener("click", () => { state.activeTags = new Set(); render(); });
+    chipRow.appendChild(clear);
+  }
+  tags.forEach(tag => {
+    const chip = document.createElement("button");
+    chip.className = "chip" + (state.activeTags.has(tag) ? " active" : "");
+    chip.textContent = tag;
+    chip.addEventListener("click", () => {
+      if (state.activeTags.has(tag)) state.activeTags.delete(tag);
+      else state.activeTags.add(tag);
+      render();
+    });
+    chipRow.appendChild(chip);
+  });
+}
+
+function matchesSearch(row, q, fields){
+  if (!q) return true;
+  const hay = [row[fields.name], row[fields.desc]]
+    .concat((fields.meta || []).map(m => row[m[1]]))
+    .filter(Boolean).join(" ").toLowerCase();
+  return hay.includes(q.toLowerCase());
+}
+
+function matchesTags(row){
+  if (state.activeTags.size === 0) return true;
+  const rowTags = row.tags || [];
+  for (const t of state.activeTags) {
+    if (rowTags.includes(t)) return true;
+  }
+  return false;
+}
+
+function escapeHtml(str){
+  if (str === null || str === undefined) return "";
+  return String(str)
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+}
+
+function render(){
+  document.querySelectorAll("nav.sections button").forEach(b => {
+    b.classList.toggle("active", b.dataset.key === state.section);
+  });
+
+  const sec = currentSection();
+  renderChips();
+
+  const filtered = sec.data.filter(row =>
+    matchesSearch(row, state.search, sec.fields) && matchesTags(row)
+  );
+
+  document.getElementById("resultsMeta").textContent =
+    filtered.length + " of " + sec.data.length + " resources shown";
+
+  const grid = document.getElementById("grid");
+  const empty = document.getElementById("emptyState");
+  grid.innerHTML = "";
+
+  if (filtered.length === 0) {
+    empty.style.display = "block";
+  } else {
+    empty.style.display = "none";
+    filtered.forEach(row => grid.appendChild(buildCard(row, sec.fields)));
+  }
+}
+
+function buildCard(row, fields){
+  const card = document.createElement("div");
+  card.className = "card";
+
+  const name = document.createElement("div");
+  name.className = "card-name";
+  name.textContent = row[fields.name] || "";
+  card.appendChild(name);
+
+  if (row[fields.desc]) {
+    const desc = document.createElement("div");
+    desc.className = "card-desc";
+    desc.textContent = row[fields.desc];
+    card.appendChild(desc);
+  }
+
+  const meta = document.createElement("div");
+  meta.className = "card-meta";
+  (fields.meta || []).forEach(([label, key]) => {
+    const val = row[key];
+    if (val) {
+      const line = document.createElement("div");
+      line.innerHTML = "<b>" + escapeHtml(label) + ":</b> " + escapeHtml(val);
+      meta.appendChild(line);
+    }
+  });
+  if (meta.childNodes.length) card.appendChild(meta);
+
+  if (row.tags && row.tags.length) {
+    const tagWrap = document.createElement("div");
+    tagWrap.className = "card-tags";
+    row.tags.forEach(t => {
+      const pill = document.createElement("span");
+      pill.className = "tag-pill";
+      pill.textContent = t;
+      tagWrap.appendChild(pill);
+    });
+    card.appendChild(tagWrap);
+  }
+
+  const linkVal = row[fields.link];
+  if (linkVal && /^https?:\/\//.test(linkVal)) {
+    const a = document.createElement("a");
+    a.className = "card-link";
+    a.href = linkVal;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    a.innerHTML = 'Open resource <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>';
+    card.appendChild(a);
+  } else {
+    const noLink = document.createElement("div");
+    noLink.className = "no-link";
+    noLink.textContent = "No public link on file - contact the One Rhode Navigation Team for details.";
+    card.appendChild(noLink);
+  }
+
+  return card;
+}
+
+document.getElementById("search").addEventListener("input", (e) => {
+  state.search = e.target.value;
+  render();
+});
+
+// ---- Copy / download deterrents ----
+// These raise friction for casual copying; they do not prevent screenshots,
+// browser dev tools, or view-source, and are not a substitute for real access control.
+document.addEventListener("contextmenu", e => e.preventDefault());
+document.addEventListener("copy", e => e.preventDefault());
+document.addEventListener("cut", e => e.preventDefault());
+document.addEventListener("dragstart", e => e.preventDefault());
+document.addEventListener("keydown", e => {
+  const k = e.key.toLowerCase();
+  const mod = e.ctrlKey || e.metaKey;
+  if (mod && ["c","x","s","p","u"].includes(k)) {
+    e.preventDefault();
+  }
+  if (k === "f12") e.preventDefault();
+});
+
+render();
+
+</script>
+</body>
+</html>
