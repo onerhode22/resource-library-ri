@@ -39,22 +39,25 @@
     position:relative;
     overflow:hidden;
   }
-  header.site::after{
-    content:"";
+  .header-content{ position:relative; z-index:1; }
+  .header-deco{ position:absolute; inset:0; z-index:0; pointer-events:none; }
+  .header-deco .ring{
     position:absolute;
-    right:-40px; top:-60px;
-    width:260px; height:260px;
-    border:1px solid rgba(77,217,192,0.18);
+    border-radius:50%;
+    border:1px solid rgba(77,217,192,0.20);
+  }
+  .header-deco .dot{
+    position:absolute;
     border-radius:50%;
   }
-  header.site::before{
-    content:"";
-    position:absolute;
-    right:20px; top:-20px;
-    width:180px; height:180px;
-    border:1px solid rgba(77,217,192,0.12);
-    border-radius:50%;
-  }
+  .header-deco .ring-1{ width:280px; height:280px; right:-50px; top:-80px; border-color:rgba(77,217,192,0.22); }
+  .header-deco .ring-2{ width:190px; height:190px; right:10px; top:-10px; border-color:rgba(77,217,192,0.16); }
+  .header-deco .ring-3{ width:110px; height:110px; right:160px; bottom:-55px; border-color:rgba(255,255,255,0.14); }
+  .header-deco .ring-4{ width:60px; height:60px; right:70px; bottom:30px; border-color:rgba(77,217,192,0.30); }
+  .header-deco .dot-1{ width:10px; height:10px; right:120px; top:38px; background:var(--cyan); opacity:0.85; }
+  .header-deco .dot-2{ width:6px; height:6px; right:250px; top:70px; background:rgba(255,255,255,0.5); }
+  .header-deco .dot-3{ width:14px; height:14px; right:40px; bottom:65px; background:var(--cyan); opacity:0.35; }
+  .header-deco .dot-4{ width:5px; height:5px; left:8px; bottom:10px; background:rgba(77,217,192,0.6); }
   .eyebrow{
     font-family:var(--font-body);
     font-size:11px;
@@ -79,7 +82,7 @@
     line-height:1.55;
     color:rgba(255,255,255,0.72);
     margin-top:10px;
-    max-width:640px;
+    max-width:900px;
   }
   .disclaimer{
     font-family:var(--font-body);
@@ -87,7 +90,7 @@
     line-height:1.7;
     color:rgba(255,255,255,0.82);
     margin-top:20px;
-    max-width:760px;
+    max-width:1000px;
     padding:16px 20px;
     border-left:3px solid var(--cyan);
     background:rgba(255,255,255,0.06);
@@ -328,10 +331,22 @@
 <body>
 
 <header class="site">
-  <div class="eyebrow">One Rhode Consulting - Navigation Service</div>
-  <h1 class="title">Resource Library</h1>
-  <p class="tagline">Grant opportunities, pro bono support, ready-to-use templates, and funding-landscape intelligence for Rhode Island nonprofits.</p>
-  <p class="disclaimer">This information is shared as a resource-identification offering to help nonprofits find relevant opportunities and support. <b>There is an expectation that you will thoroughly read and vet any opportunity before applying.</b> Inclusion on this page is not an endorsement, and we do not include every opportunity or resource that exists. If you have questions, contact us at <a href="mailto:info@onerhode.com">info@onerhode.com</a>.</p>
+  <div class="header-deco" aria-hidden="true">
+    <span class="ring ring-1"></span>
+    <span class="ring ring-2"></span>
+    <span class="ring ring-3"></span>
+    <span class="ring ring-4"></span>
+    <span class="dot dot-1"></span>
+    <span class="dot dot-2"></span>
+    <span class="dot dot-3"></span>
+    <span class="dot dot-4"></span>
+  </div>
+  <div class="header-content">
+    <div class="eyebrow">One Rhode Consulting - Navigation Service</div>
+    <h1 class="title">Resource Library</h1>
+    <p class="tagline">Grant opportunities, pro bono support, ready-to-use templates, and funding-landscape intelligence for Rhode Island nonprofits.</p>
+    <p class="disclaimer">This information is shared as a resource-identification offering to help nonprofits find relevant opportunities and support. <b>There is an expectation that you will thoroughly read and vet any opportunity before applying.</b> Inclusion on this page is not an endorsement, and we do not include every opportunity or resource that exists. If you have questions, contact us at <a href="mailto:info@onerhode.com">info@onerhode.com</a>.</p>
+  </div>
 </header>
 
 <nav class="sections" id="sectionNav"></nav>
